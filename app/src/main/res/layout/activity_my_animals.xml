@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutAnimals"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/button_Add"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#3DDC84"
+        android:text="Добавить" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/list_MyAnimals"
+            android:layout_width="match_parent"
+            android:layout_height="690dp"
+            android:layout_weight="1">
+
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

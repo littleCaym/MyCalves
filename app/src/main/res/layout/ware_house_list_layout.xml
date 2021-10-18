@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/textViewWareHouseListViewName"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/imageViewWareHouseListView"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="4"
+        android:scaleType="fitEnd"
+        tools:srcCompat="@drawable/ic_group_collapse_15" />
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.calfcounting">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Мои телята"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.example.calfcounting.DayList"
+            android:parentActivityName="com.example.calfcounting.MainActivity"/>
+        <activity android:name="com.example.calfcounting.IllnessesInfo"
+            android:parentActivityName="com.example.calfcounting.Illnesses"/>
+        <activity android:name="com.example.calfcounting.RationInfo"
+            android:parentActivityName="com.example.calfcounting.Rations"/>
+        <activity android:name="com.example.calfcounting.Ration"/>
+        <activity android:name="com.example.calfcounting.Rations"
+            android:parentActivityName="com.example.calfcounting.MainActivity"/>
+        <activity android:name="com.example.calfcounting.FoodInfo"
+            android:parentActivityName="com.example.calfcounting.WareHouse"/>
+        <activity android:name="com.example.calfcounting.MedicineInfo"
+            android:parentActivityName="com.example.calfcounting.MedKit"/>
+        <activity android:name="com.example.calfcounting.AnimalInfo"
+            android:parentActivityName="com.example.calfcounting.MyAnimals"/>
+        <activity android:name="com.example.calfcounting.Illness"
+            android:parentActivityName="com.example.calfcounting.Illnesses"/>
+        <activity android:name="com.example.calfcounting.Medicine"
+            android:parentActivityName="com.example.calfcounting.MedKit"/>
+        <activity android:name="com.example.calfcounting.Animal"
+            android:parentActivityName="com.example.calfcounting.MyAnimals"/>
+        <activity android:name="com.example.calfcounting.Food"
+            android:parentActivityName="com.example.calfcounting.WareHouse"/>
+        <activity android:name="com.example.calfcounting.Illnesses"
+            android:parentActivityName="com.example.calfcounting.MainActivity"/>
+        <activity android:name="com.example.calfcounting.MedKit"
+            android:parentActivityName="com.example.calfcounting.MainActivity"/>
+        <activity android:name="com.example.calfcounting.WareHouse"
+            android:parentActivityName="com.example.calfcounting.MainActivity"/>
+        <activity android:name="com.example.calfcounting.MyAnimals"
+            android:parentActivityName="com.example.calfcounting.MainActivity"/>
+        <activity android:name="com.example.calfcounting.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

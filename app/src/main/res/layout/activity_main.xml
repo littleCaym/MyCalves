@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/button_Daily"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#3DDC84"
+                            android:text="Дневной обход" />
+
+                        <Button
+                            android:id="@+id/button_MyAnimal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#3DDC84"
+                            android:text="Мои животные" />
+
+                        <Button
+                            android:id="@+id/button_Sklad"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#3DDC84"
+                            android:text="Склад" />
+
+                        <Button
+                            android:id="@+id/button_Aptechka"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#3DDC84"
+                            android:text="Аптечка" />
+
+                        <Button
+                            android:id="@+id/button_rations"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#3DDC84"
+                            android:text="Рационы питания" />
+
+                        <Button
+                            android:id="@+id/button_Illnesses"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#3DDC84"
+                            android:text="Справочник болезней" />
+
+                </LinearLayout>
+        </RelativeLayout>
+
+</LinearLayout>
