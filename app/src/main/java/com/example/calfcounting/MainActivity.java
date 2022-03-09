@@ -9,11 +9,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.facebook.stetho.Stetho;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
-
-import okhttp3.OkHttpClient;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
@@ -24,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button sklad_button;
     Button aptechka_button;
     Button spravochnikBolezney_button;
+    Button kompikormPrices_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Главное меню");
-
-
-        //Наш Сетхо
-        Stetho.initializeWithDefaults(this);
-        new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .build();
-
-
-
-
 
         dayList_button = (Button) findViewById(R.id.button_Daily);
         dayList_button.setOnClickListener(this);
@@ -91,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent6 = new Intent(this, Illnesses.class);
                 startActivity(intent6);
                 break;
+                //The restored info must be opened
+            case R.id.button_KombikormPrices:
+                Intent intent7 = new Intent(this, KombikornPrices.class);
+                startActivity(intent7);
 
         }
     }

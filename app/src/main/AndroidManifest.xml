@@ -9,38 +9,56 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.calfcounting.DayList"
-            android:parentActivityName="com.example.calfcounting.MainActivity"/>
-        <activity android:name="com.example.calfcounting.IllnessesInfo"
-            android:parentActivityName="com.example.calfcounting.Illnesses"/>
-        <activity android:name="com.example.calfcounting.RationInfo"
-            android:parentActivityName="com.example.calfcounting.Rations"/>
-        <activity android:name="com.example.calfcounting.Ration"/>
-        <activity android:name="com.example.calfcounting.Rations"
-            android:parentActivityName="com.example.calfcounting.MainActivity"/>
-        <activity android:name="com.example.calfcounting.FoodInfo"
-            android:parentActivityName="com.example.calfcounting.WareHouse"/>
-        <activity android:name="com.example.calfcounting.MedicineInfo"
-            android:parentActivityName="com.example.calfcounting.MedKit"/>
-        <activity android:name="com.example.calfcounting.AnimalInfo"
-            android:parentActivityName="com.example.calfcounting.MyAnimals"/>
-        <activity android:name="com.example.calfcounting.Illness"
-            android:parentActivityName="com.example.calfcounting.Illnesses"/>
-        <activity android:name="com.example.calfcounting.Medicine"
-            android:parentActivityName="com.example.calfcounting.MedKit"/>
-        <activity android:name="com.example.calfcounting.Animal"
-            android:parentActivityName="com.example.calfcounting.MyAnimals"/>
-        <activity android:name="com.example.calfcounting.Food"
-            android:parentActivityName="com.example.calfcounting.WareHouse"/>
-        <activity android:name="com.example.calfcounting.Illnesses"
-            android:parentActivityName="com.example.calfcounting.MainActivity"/>
-        <activity android:name="com.example.calfcounting.MedKit"
-            android:parentActivityName="com.example.calfcounting.MainActivity"/>
-        <activity android:name="com.example.calfcounting.WareHouse"
-            android:parentActivityName="com.example.calfcounting.MainActivity"/>
-        <activity android:name="com.example.calfcounting.MyAnimals"
-            android:parentActivityName="com.example.calfcounting.MainActivity"/>
-        <activity android:name="com.example.calfcounting.MainActivity">
+        <activity
+            android:name=".KombikornPrices"
+            android:exported="true" />
+        <activity
+            android:name=".DayList"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".IllnessesInfo"
+            android:parentActivityName=".Illnesses" />
+        <activity
+            android:name=".RationInfo"
+            android:parentActivityName=".Rations" />
+        <activity android:name=".Ration" />
+        <activity
+            android:name=".Rations"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FoodInfo"
+            android:parentActivityName=".WareHouse" />
+        <activity
+            android:name=".MedicineInfo"
+            android:parentActivityName=".MedKit" />
+        <activity
+            android:name=".AnimalInfo"
+            android:parentActivityName=".MyAnimals" />
+        <activity
+            android:name=".Illness"
+            android:parentActivityName=".Illnesses" />
+        <activity
+            android:name=".Medicine"
+            android:parentActivityName=".MedKit" />
+        <activity
+            android:name=".Animal"
+            android:parentActivityName=".MyAnimals" />
+        <activity
+            android:name=".Food"
+            android:parentActivityName=".WareHouse" />
+        <activity
+            android:name=".Illnesses"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MedKit"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".WareHouse"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MyAnimals"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

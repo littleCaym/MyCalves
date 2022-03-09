@@ -96,6 +96,22 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "med2_id integer"
                 +");");
 
+        db.execSQL("DROP TABLE IF EXISTS "+"GOODS_DATABASE"+"."+"GOODS_AVITO"+";");
+        db.execSQL("CREATE TABLE "+"GOODS_AVITO"+"(" +
+                "ID" + " INTEGER primary key autoincrement," +
+                "TITLE" + " VARCHAR(255)," +
+                "PRICE" + " float," +
+                "BRAND" + " VARCHAR(255)," +
+                "BRAND_RATING" + " FLOAT," +
+                "REVIEWS_NUM" + " INT," +
+                "LINK" + " text," +
+                "DATE_UPLOAD" + " VARCHAR(255)," +
+                "DESCRIPTION" + " text," +
+                "LOCATION" + " VARCHAR(255)," +
+                "DATE_VIEWED" + " date" +
+                ");"
+        );
+
 
         setStartDayListList(db);
         setStartIllnessesList(db);
