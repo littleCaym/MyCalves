@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
+
     <item
         android:title="Home"
         android:id="@+id/button_home"
@@ -10,4 +11,5 @@
         app:showAsAction="always"
         android:icon="@drawable/home"
          />
+
 </menu>

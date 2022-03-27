@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="update"
+        android:id="@+id/button_update"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_update_12"
+        />
+
+    <item
+        android:title="purchases"
+        android:id="@+id/button_purchases"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_where_to_buy"
+        />
+
+    <item
+        android:title="Home"
+        android:id="@+id/button_home"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/home"
+        />
+</menu>

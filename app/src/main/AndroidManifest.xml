@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".KombikornPrices"
-            android:exported="true" />
+            android:name=".CompoundAdverts"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DayList"
             android:parentActivityName=".MainActivity" />

@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button sklad_button;
     Button aptechka_button;
     Button spravochnikBolezney_button;
-    Button kompikormPrices_button;
+    Button compoundAdverts_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         spravochnikBolezney_button = (Button) findViewById(R.id.button_Illnesses);
         spravochnikBolezney_button.setOnClickListener(this);
+
+        compoundAdverts_button = findViewById(R.id.button_compound_adverts);
+        compoundAdverts_button.setOnClickListener(this);
 
     }
 
@@ -77,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent6);
                 break;
                 //The restored info must be opened
-            case R.id.button_KombikormPrices:
-                Intent intent7 = new Intent(this, KombikornPrices.class);
+            case R.id.button_compound_adverts:
+                Intent intent7 = new Intent(this, CompoundAdverts.class);
                 startActivity(intent7);
 
         }

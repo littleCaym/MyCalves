@@ -75,7 +75,7 @@
                             android:text="Справочник болезней" />
 
                         <Button
-                            android:id="@+id/button_KombikormPrices"
+                            android:id="@+id/button_compound_adverts"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
