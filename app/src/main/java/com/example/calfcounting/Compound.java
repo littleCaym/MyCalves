@@ -1,5 +1,7 @@
 package com.example.calfcounting;
 
+import java.util.Date;
+
 public class Compound {
 
     public static final String ID = "ID";
@@ -12,14 +14,14 @@ public class Compound {
     public static final String PRICE = "PRICE";
     public static final String CONNECTION_TIME = "CONNECTION_TIME";
     private long id;
-    private String name;
-    private String seller;
+    private String name ="";
+    private String seller ="";
     private float rating;
-    private long upload_advert_date;
-    private String description;
-    private String link_to_advert;
+    private String upload_advert_date ="";
+    private String description ="";
+    private String link_to_advert ="";
     private float price;
-    private long connection_time;
+    private java.util.Date connection_time;
 
     public long getId() {
         return id;
@@ -77,20 +79,19 @@ public class Compound {
         this.price = price;
     }
 
-    public long getUpload_advert_date() {
+    public String getUpload_advert_date() {
         return upload_advert_date;
     }
 
-    public void setUpload_advert_date(long upload_advert_date) {
+    public void setUpload_advert_date(String upload_advert_date) {
         this.upload_advert_date = upload_advert_date;
     }
 
-    public long getConnection_time() {
+    public Date getConnection_time() {
         return connection_time;
     }
 
-    public void setConnection_time(long connection_time) {
+    public void setConnection_time(Date connection_time) {
         this.connection_time = connection_time;
     }
-
 }

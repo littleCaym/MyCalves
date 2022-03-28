@@ -9,6 +9,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.facebook.stetho.Stetho;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startStetho();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Главное меню");
@@ -85,6 +89,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent7);
 
         }
+    }
+
+    private void startStetho(){
+        // Create an InitializerBuilder
+        Stetho.InitializerBuilder initializerBuilder =
+                Stetho.newInitializerBuilder(this);
+
+        // Enable Chrome DevTools
+        initializerBuilder.enableWebKitInspector(
+                Stetho.defaultInspectorModulesProvider(this)
+        );
+
+        // Enable command line interface
+        initializerBuilder.enableDumpapp(
+                Stetho.defaultDumperPluginsProvider(this)
+        );
+
+        // Use the InitializerBuilder to generate an Initializer
+        Stetho.Initializer initializer = initializerBuilder.build();
+
+        // Initialize Stetho with the Initializer
+        Stetho.initialize(initializer);
     }
 
 

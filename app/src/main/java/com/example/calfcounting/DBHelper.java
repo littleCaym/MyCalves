@@ -11,7 +11,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
         // конструктор суперкласса
-        super(context, "myNewDataBase", null, 1);
+        super(context, "MY_CALVES", null, 1);
     }
 
     @Override
@@ -96,6 +96,35 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "med2_id integer"
                 +");");
 
+        db.execSQL("DROP TABLE IF EXISTS "+"GOODS_DATABASE"+"."+"COMPOUNDS"+";");
+        db.execSQL("CREATE TABLE "+"COMPOUNDS"+"(" +
+                "ID" + " INTEGER primary key autoincrement," +
+                "NAME" + " VARCHAR(255)," +
+                "PRICE" + " float," +
+                "SELLER" + " VARCHAR(255)," +
+                "RATING" + " FLOAT," +
+                "REVIEWS_NUM" + " INT," +
+                "LINK_TO_ADVERT" + " text," +
+                "UPLOAD_ADVERT_DATE" + " VARCHAR(255)," +
+                "DESCRIPTION" + " text," +
+                "LOCATION" + " VARCHAR(255)," +
+                "CONNECTION_TIME" + " date" +
+                ");"
+        );
+
+//        db.execSQL("create table compounds("
+//                + "id integer primary key autoincrement,"
+//                + "name text,"
+//                + "seller text,"
+//                + "rating float,"
+//                + "upload_advert_date VARCHAR(255),"
+//                + "description text,"
+//                + "link_to_advert text,"
+//                + "price float,"
+//                + "connection_time date"
+//                +");");
+
+        /*
         db.execSQL("DROP TABLE IF EXISTS "+"GOODS_DATABASE"+"."+"GOODS_AVITO"+";");
         db.execSQL("CREATE TABLE "+"GOODS_AVITO"+"(" +
                 "ID" + " INTEGER primary key autoincrement," +
@@ -112,6 +141,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 ");"
         );
 
+         */
+
 
         setStartDayListList(db);
         setStartIllnessesList(db);
@@ -120,12 +151,14 @@ public class DBHelper extends SQLiteOpenHelper {
         setStartWareHouseList(db);
         setStartReceptsList(db);
         setStartRationsList(db);
+        setStartCompoundsList(db);
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+//        db.execSQL("DROP DATABAS");
+//        onCreate(db);
     }
 
     public void setStartDayListList(SQLiteDatabase db){
@@ -1098,6 +1131,58 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("prod6_portion", 3000);
             db.insert("rations", null, cv);
         }
+    }
+
+    public void setStartCompoundsList(SQLiteDatabase db) {
+
+        ContentValues cv = new ContentValues();
+        cv.put(Compound.NAME, "Комбикорм для крс,мрс");
+        cv.put(Compound.SELLER, "Евгения");
+        cv.put(Compound.PRICE, 500.0);
+        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        db.insert("compounds", null, cv);
+
+        cv = new ContentValues();
+        cv.put(Compound.NAME, "Комбикорм для крс (К-60-ву) Раменский");
+        cv.put(Compound.SELLER, "Сельский дворик");
+        cv.put(Compound.PRICE, 820.0);
+        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        db.insert("compounds", null, cv);
+
+        cv = new ContentValues();
+        cv.put(Compound.NAME, "Комбикорм для с/х Животных и птиц");
+        cv.put(Compound.SELLER, "Сено №1");
+        cv.put(Compound.PRICE, 570.0);
+        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        db.insert("compounds", null, cv);
+
+        cv = new ContentValues();
+        cv.put(Compound.NAME, "Комбикорм кк-65 для откорма крс");
+        cv.put(Compound.SELLER, "Вкусное сено");
+        cv.put(Compound.PRICE, 420.0);
+        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        db.insert("compounds", null, cv);
+
+        cv = new ContentValues();
+        cv.put(Compound.NAME, "Зерно и комбикорм для С/Х животных");
+        cv.put(Compound.SELLER, "Ибрагим");
+        cv.put(Compound.PRICE, 680.0);
+        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        db.insert("compounds", null, cv);
+
+        cv = new ContentValues();
+        cv.put(Compound.NAME, "Комбикорм для крс,мрс");
+        cv.put(Compound.SELLER, "Евгения");
+        cv.put(Compound.PRICE, 500.0);
+        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        db.insert("compounds", null, cv);
+
+        cv = new ContentValues();
+        cv.put(Compound.NAME, "Корм для крс");
+        cv.put(Compound.SELLER, "Игорь");
+        cv.put(Compound.PRICE, 540.0);
+        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        db.insert("compounds", null, cv);
 
     }
 }
