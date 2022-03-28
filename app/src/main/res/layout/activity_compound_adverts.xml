@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:text="Дата обновления"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listViewKombikormPricesList"
