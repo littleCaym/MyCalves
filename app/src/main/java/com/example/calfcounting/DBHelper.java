@@ -1139,6 +1139,13 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.NAME, "Комбикорм для крс,мрс");
         cv.put(Compound.SELLER, "Евгения");
         cv.put(Compound.PRICE, 500.0);
+        cv.put(Compound.RATING, 3.4);
+        cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
+                "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
+                "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
+                "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
+                "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
+        cv.put(Compound.UPLOAD_ADVERT_DATE, "Вчера в 19:57");
         cv.put(Compound.CONNECTION_TIME, "2021-10-12");
         db.insert("compounds", null, cv);
 
@@ -1146,6 +1153,12 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.NAME, "Комбикорм для крс (К-60-ву) Раменский");
         cv.put(Compound.SELLER, "Сельский дворик");
         cv.put(Compound.PRICE, 820.0);
+        cv.put(Compound.RATING, 4.4);
+        cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
+                "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
+                "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
+                "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
+                "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
         cv.put(Compound.CONNECTION_TIME, "2021-10-12");
         db.insert("compounds", null, cv);
 
@@ -1153,6 +1166,12 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.NAME, "Комбикорм для с/х Животных и птиц");
         cv.put(Compound.SELLER, "Сено №1");
         cv.put(Compound.PRICE, 570.0);
+        cv.put(Compound.RATING, 5.0);
+        cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
+                "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
+                "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
+                "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
+                "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
         cv.put(Compound.CONNECTION_TIME, "2021-10-12");
         db.insert("compounds", null, cv);
 
@@ -1160,6 +1179,11 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.NAME, "Комбикорм кк-65 для откорма крс");
         cv.put(Compound.SELLER, "Вкусное сено");
         cv.put(Compound.PRICE, 420.0);
+        cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
+                "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
+                "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
+                "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
+                "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
         cv.put(Compound.CONNECTION_TIME, "2021-10-12");
         db.insert("compounds", null, cv);
 
@@ -1167,6 +1191,11 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.NAME, "Зерно и комбикорм для С/Х животных");
         cv.put(Compound.SELLER, "Ибрагим");
         cv.put(Compound.PRICE, 680.0);
+        cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
+                "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
+                "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
+                "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
+                "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
         cv.put(Compound.CONNECTION_TIME, "2021-10-12");
         db.insert("compounds", null, cv);
 
@@ -1174,6 +1203,11 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.NAME, "Комбикорм для крс,мрс");
         cv.put(Compound.SELLER, "Евгения");
         cv.put(Compound.PRICE, 500.0);
+        cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
+                "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
+                "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
+                "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
+                "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
         cv.put(Compound.CONNECTION_TIME, "2021-10-12");
         db.insert("compounds", null, cv);
 
@@ -1181,6 +1215,11 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.NAME, "Корм для крс");
         cv.put(Compound.SELLER, "Игорь");
         cv.put(Compound.PRICE, 540.0);
+        cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
+                "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
+                "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
+                "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
+                "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
         cv.put(Compound.CONNECTION_TIME, "2021-10-12");
         db.insert("compounds", null, cv);
 
