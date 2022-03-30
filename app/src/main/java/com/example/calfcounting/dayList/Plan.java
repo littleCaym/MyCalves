@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.dayList;
 
 public class Plan {
     private String animalName;

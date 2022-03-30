@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.warehouse;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.R;
+import com.example.calfcounting.warehouse.WareHouse;
 
 
 public class Food extends AppCompatActivity implements View.OnClickListener{

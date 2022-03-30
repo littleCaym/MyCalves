@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.compounds;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.example.calfcounting.R;
 
 import java.util.ArrayList;
 

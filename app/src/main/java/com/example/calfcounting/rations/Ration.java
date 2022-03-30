@@ -1,8 +1,10 @@
-package com.example.calfcounting;
+package com.example.calfcounting.rations;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.calfcounting.R;
 
 public class Ration extends AppCompatActivity {
 

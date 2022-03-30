@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.calfcounting.compounds.Compound;
+
 import java.util.Date;
 
 public class DBHelper extends SQLiteOpenHelper {

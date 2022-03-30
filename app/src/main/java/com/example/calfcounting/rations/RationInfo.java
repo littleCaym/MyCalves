@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.rations;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.calfcounting.MainActivity;
+import com.example.calfcounting.R;
 
 public class RationInfo extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.medkit;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.R;
 
 public class Medicine extends AppCompatActivity implements View.OnClickListener{
 

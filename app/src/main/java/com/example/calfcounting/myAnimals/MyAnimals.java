@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.myAnimals;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,6 +18,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.MainActivity;
+import com.example.calfcounting.R;
 
 import java.util.ArrayList;
 

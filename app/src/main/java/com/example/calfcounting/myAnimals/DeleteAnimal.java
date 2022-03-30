@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.myAnimals;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.calfcounting.DBHelper;
 
 public class DeleteAnimal extends DialogFragment {
     private Animal animal;

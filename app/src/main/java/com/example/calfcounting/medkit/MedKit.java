@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.medkit;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -16,107 +16,106 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.MainActivity;
+import com.example.calfcounting.R;
+
 import java.util.ArrayList;
 
-public class WareHouse extends AppCompatActivity implements View.OnClickListener, ListView.OnItemClickListener,
-ListView.OnItemLongClickListener{
+public class MedKit extends AppCompatActivity implements View.OnClickListener, ListView.OnItemClickListener {
 
-    Button add_button;
+    Button add_button;;
     ListView listView;
 
-    private ArrayList<Food> foodArrayList;
+    DBHelper dbHelper; SQLiteDatabase db;
+
+    private ArrayList<Medicine> medicinesArrayList;
     private String stringList[];
 
-    SQLiteDatabase db;
-    DBHelper dbHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ware_house);
+        setContentView(R.layout.activity_med_kit);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Склад");
+        actionBar.setTitle("Апетчка");
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
+
+
         dbHelper = new DBHelper(this);
 
-        listView = findViewById(R.id.list_MyFood);
+        listView = findViewById(R.id.list_MyMedicines);
         //создаем массив классов Animal
-        foodArrayList = new ArrayList<>();
+        medicinesArrayList = new ArrayList<>();
         //Заполняем его
-        foodArrayList = readDB();
-
+        medicinesArrayList = readDB();
         //теперь создаем массив строк размера массива классов
-        stringList = new String[foodArrayList.size()];
-        for (int i=0; i < foodArrayList.size(); ++i){ //???????? че с i?
-            stringList[i] = foodArrayList.get(i).getName();
+        stringList = new String[medicinesArrayList.size()];
+        for (int i=0; i < medicinesArrayList.size(); ++i){ //???????? че с i?
+            stringList[i] = medicinesArrayList.get(i).getName();
         }
         //делаем адаптер
-        WareHouseArrayAdapter adapter = new WareHouseArrayAdapter(this, foodArrayList);
+        MedKitArrayAdapter adapter = new MedKitArrayAdapter(this, medicinesArrayList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
-        listView.setOnItemLongClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
         int i = (int) id;
+        Intent intent = new Intent(this, MedicineInfo.class);
 
-        Intent intent = new Intent(this, FoodInfo.class);
-
-        intent.putExtra("position", position);
-        intent.putExtra("name", foodArrayList.get(i).getName());
-        intent.putExtra("price", foodArrayList.get(i).getPrice());
-        intent.putExtra("amount", foodArrayList.get(i).getAmount());
+        intent.putExtra("illness", medicinesArrayList.get(i).getName());
+        intent.putExtra("amount", medicinesArrayList.get(i).getAmount());
+        intent.putExtra("price", medicinesArrayList.get(i).getPrice());
 
         startActivity(intent);
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+    private ArrayList<Medicine> readDB() {
 
-        return false;
-    }
-
-
-    private ArrayList<Food> readDB(){
-        ArrayList<Food> foodArrayList = new ArrayList<>();
+        ArrayList<Medicine> medicinesArrayList = new ArrayList<>();
+        // создаем объект для данных
         ContentValues cv = new ContentValues();
         db = dbHelper.getWritableDatabase();
 
-        Cursor c = db.query("myWareHouse",null, null,null,null,null,"name");
+        Cursor c = db.query("aptechka", null, null, null, null, null, "illness");
 
-
-        if(c.moveToFirst()){
-            int nameColIndex = c.getColumnIndex("name");
+        // ставим позицию курсора на первую строку выборки
+        // если в выборке нет строк, вернется false
+        if (c.moveToFirst()) {
+            int nameColIndex = c.getColumnIndex("illness");
             int priceColIndex = c.getColumnIndex("price");
             int amountColIndex = c.getColumnIndex("amount");
             int statusColIndex = c.getColumnIndex("status");
 
-            do{
-               Food f = new Food();
-               f.setName(c.getString(nameColIndex));
-               f.setPrice(c.getString(priceColIndex));
-               f.setAmount(c.getInt(amountColIndex));
-               f.setStatus(c.getInt(statusColIndex));
-               foodArrayList.add(f);
+            do {
+                Medicine m = new Medicine();
+                m.setName(c.getString(nameColIndex));
+                m.setPrice(c.getString(priceColIndex));
+                m.setAmount(c.getFloat(amountColIndex));
+                m.setStatus(c.getInt(statusColIndex));
+                medicinesArrayList.add(m);
 
-            }while (c.moveToNext());
+            } while (c.moveToNext());
         }
         c.close();
 
-        return foodArrayList;
+        return medicinesArrayList;
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu1, menu);
         return super.onCreateOptionsMenu(menu);
@@ -133,6 +132,4 @@ ListView.OnItemLongClickListener{
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

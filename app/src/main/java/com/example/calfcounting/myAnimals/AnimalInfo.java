@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.myAnimals;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -21,6 +21,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.MainActivity;
+import com.example.calfcounting.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

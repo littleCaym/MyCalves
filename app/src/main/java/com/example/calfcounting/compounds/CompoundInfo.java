@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.compounds;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.calfcounting.MainActivity;
+import com.example.calfcounting.R;
 
 import java.util.Objects;
 

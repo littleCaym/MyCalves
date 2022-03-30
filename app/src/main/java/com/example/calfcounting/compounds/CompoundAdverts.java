@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.compounds;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.R;
 
 import java.sql.Date;
 import java.text.ParseException;

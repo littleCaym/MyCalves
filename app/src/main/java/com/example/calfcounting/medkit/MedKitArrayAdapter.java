@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.medkit;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,14 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.calfcounting.R;
+
 import java.util.ArrayList;
 
-public class WareHouseArrayAdapter extends BaseAdapter {
+public class MedKitArrayAdapter extends BaseAdapter {
     Context context;
     LayoutInflater layoutInflater;
-    ArrayList<Food> objects;
+    ArrayList<Medicine> objects;
 
-    public WareHouseArrayAdapter(Context context, ArrayList<Food> objects) {
+    public MedKitArrayAdapter(Context context, ArrayList<Medicine> objects) {
         this.context = context;
         this.objects = objects;
         layoutInflater = (LayoutInflater) context.
@@ -53,9 +55,9 @@ public class WareHouseArrayAdapter extends BaseAdapter {
             case 0: imageView.setImageResource(R.drawable.not_at_all); break;
             case 1: imageView.setImageResource(R.drawable.not_enough); break;
             case 2: imageView.setImageDrawable(null);
-            //case 0: textView.setBackgroundColor(Color.parseColor("FFF44336")); break;
-            //case 1: textView.setBackgroundColor(Color.parseColor("FFFFEB3B")); break;
-            //case 2: textView.setBackgroundColor(Color.parseColor("FF8BC34A")); break;
+                //case 0: textView.setBackgroundColor(Color.parseColor("FFF44336")); break;
+                //case 1: textView.setBackgroundColor(Color.parseColor("FFFFEB3B")); break;
+                //case 2: textView.setBackgroundColor(Color.parseColor("FF8BC34A")); break;
         }
 
         return view;

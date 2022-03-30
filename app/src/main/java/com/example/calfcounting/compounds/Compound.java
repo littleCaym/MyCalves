@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.compounds;
 
 import android.os.Parcel;
 import android.os.Parcelable;

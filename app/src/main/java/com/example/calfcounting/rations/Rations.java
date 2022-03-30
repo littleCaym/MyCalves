@@ -1,4 +1,4 @@
-package com.example.calfcounting;
+package com.example.calfcounting.rations;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -16,6 +16,10 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.MainActivity;
+import com.example.calfcounting.R;
 
 import java.util.ArrayList;
 

@@ -10,56 +10,56 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CompoundInfo"
-            android:parentActivityName=".CompoundAdverts" />
+            android:name=".compounds.CompoundInfo"
+            android:parentActivityName=".compounds.CompoundAdverts" />
         <activity
-            android:name=".CompoundAdverts"
+            android:name=".compounds.CompoundAdverts"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".DayList"
+            android:name=".dayList.DayList"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".IllnessesInfo"
-            android:parentActivityName=".Illnesses" />
+            android:name=".illnesses.IllnessesInfo"
+            android:parentActivityName=".illnesses.Illnesses" />
         <activity
-            android:name=".RationInfo"
-            android:parentActivityName=".Rations" />
-        <activity android:name=".Ration" />
+            android:name=".rations.RationInfo"
+            android:parentActivityName=".rations.Rations" />
+        <activity android:name=".rations.Ration" />
         <activity
-            android:name=".Rations"
+            android:name=".rations.Rations"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".FoodInfo"
-            android:parentActivityName=".WareHouse" />
+            android:name=".warehouse.FoodInfo"
+            android:parentActivityName=".warehouse.WareHouse" />
         <activity
-            android:name=".MedicineInfo"
-            android:parentActivityName=".MedKit" />
+            android:name=".medkit.MedicineInfo"
+            android:parentActivityName=".medkit.MedKit" />
         <activity
-            android:name=".AnimalInfo"
-            android:parentActivityName=".MyAnimals" />
+            android:name=".myAnimals.AnimalInfo"
+            android:parentActivityName=".myAnimals.MyAnimals" />
         <activity
-            android:name=".Illness"
-            android:parentActivityName=".Illnesses" />
+            android:name=".illnesses.Illness"
+            android:parentActivityName=".illnesses.Illnesses" />
         <activity
-            android:name=".Medicine"
-            android:parentActivityName=".MedKit" />
+            android:name=".medkit.Medicine"
+            android:parentActivityName=".medkit.MedKit" />
         <activity
-            android:name=".Animal"
-            android:parentActivityName=".MyAnimals" />
+            android:name=".myAnimals.Animal"
+            android:parentActivityName=".myAnimals.MyAnimals" />
         <activity
-            android:name=".Food"
-            android:parentActivityName=".WareHouse" />
+            android:name=".warehouse.Food"
+            android:parentActivityName=".warehouse.WareHouse" />
         <activity
-            android:name=".Illnesses"
+            android:name=".illnesses.Illnesses"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MedKit"
+            android:name=".medkit.MedKit"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".WareHouse"
+            android:name=".warehouse.WareHouse"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MyAnimals"
+            android:name=".myAnimals.MyAnimals"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

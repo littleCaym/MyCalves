@@ -9,6 +9,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.calfcounting.compounds.CompoundAdverts;
+import com.example.calfcounting.dayList.DayList;
+import com.example.calfcounting.illnesses.Illnesses;
+import com.example.calfcounting.medkit.MedKit;
+import com.example.calfcounting.myAnimals.MyAnimals;
+import com.example.calfcounting.rations.Rations;
+import com.example.calfcounting.warehouse.WareHouse;
 import com.facebook.stetho.Stetho;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
