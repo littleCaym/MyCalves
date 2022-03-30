@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".CompoundInfo"
+            android:parentActivityName=".CompoundAdverts" />
+        <activity
             android:name=".CompoundAdverts"
             android:parentActivityName=".MainActivity" />
         <activity

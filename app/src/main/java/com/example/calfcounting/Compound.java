@@ -1,8 +1,11 @@
 package com.example.calfcounting;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Compound {
+public class Compound implements Parcelable {
 
     public static final String ID = "ID";
     public static final String NAME = "NAME";
@@ -22,6 +25,51 @@ public class Compound {
     private String link_to_advert ="";
     private float price;
     private java.util.Date connection_time;
+
+    public static final Creator<Compound> CREATOR = new Creator<Compound>() {
+        @Override
+        public Compound createFromParcel(Parcel in) {
+            return new Compound(in);
+        }
+
+        @Override
+        public Compound[] newArray(int size) {
+            return new Compound[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(name);
+        dest.writeString(seller);
+        dest.writeFloat(rating);
+        dest.writeString(upload_advert_date);
+        dest.writeString(description);
+        dest.writeString(link_to_advert);
+        dest.writeFloat(price);
+        dest.writeLong(connection_time.getTime());//!!!!!!!!!!
+    }
+
+    private Compound(Parcel source) {
+        id = source.readLong();
+        name = source.readString();
+        seller = source.readString();
+        rating = source.readFloat();
+        upload_advert_date = source.readString();
+        description = source.readString();
+        link_to_advert = source.readString();
+        price = source.readFloat();
+        connection_time = new java.util.Date(source.readLong());
+    }
+
+    public Compound() {
+    }
 
     public long getId() {
         return id;
