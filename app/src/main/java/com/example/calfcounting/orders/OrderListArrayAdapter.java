@@ -76,7 +76,7 @@ public class OrderListArrayAdapter extends BaseAdapter {
             case 0:
             case 1:
             case 3:
-                textViewStatus.setTextColor(Color.parseColor("#FFFF00")); break;
+                textViewStatus.setTextColor(Color.parseColor("#9b870c")); break;
             case 2:
                 textViewStatus.setTextColor(Color.parseColor("#00FF00")); break;
             case 4:

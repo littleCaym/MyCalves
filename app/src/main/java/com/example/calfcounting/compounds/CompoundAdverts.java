@@ -57,7 +57,7 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
             //получаем дату последнего обновления
             dbHelper = new DBHelper(this);
             db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.query("COMPOUNDS", null, null, null, null, null, null);
+            Cursor cursor = db.query("COMPOUNDS", null, null, null, null, null, Compound.PRICE);
             cursor.moveToLast(); //На последний
 
 
