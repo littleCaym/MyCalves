@@ -2,20 +2,24 @@ package com.example.calfcounting.orders;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.calfcounting.R;
 
 import java.util.ArrayList;
 
-public class OrderListArrayAdapter extends BaseAdapter implements View.OnClickListener {
+public class OrderListArrayAdapter extends BaseAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
@@ -44,7 +48,7 @@ public class OrderListArrayAdapter extends BaseAdapter implements View.OnClickLi
 
     @SuppressLint("DefaultLocale")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             view = layoutInflater.inflate(R.layout.order_list_listview_layout, parent, false);
@@ -66,22 +70,67 @@ public class OrderListArrayAdapter extends BaseAdapter implements View.OnClickLi
         textViewRating.setText(String.valueOf(objects.get(position).getRating()));
         //todo textViewReviewsNum.setText(String.valueOf(objects.get(position).getReviewsNum));
         textViewPrice.setText(String.format("%d ₽", (int) objects.get(position).getPrice()));
+
         textViewStatus.setText(objects.get(position).getStatusString());
-        imageButtonEditStatus.setOnClickListener(this);
-        buttonDelete.setOnClickListener(this);
+        switch (objects.get(position).getStatus()){
+            case 0:
+            case 1:
+            case 3:
+                textViewStatus.setTextColor(Color.parseColor("#FFFF00")); break;
+            case 2:
+                textViewStatus.setTextColor(Color.parseColor("#00FF00")); break;
+            case 4:
+                textViewStatus.setTextColor(Color.parseColor("#FF0000")); break;
+        }
+
+
+        LinearLayout listViewClickable = view.findViewById(R.id.linearLayoutOrderListListviewClickable);
+
+        imageButtonEditStatus
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //TODO: сделать изменение статуса
+                        Toast.makeText(context, "imageButtonOrderListEditSatus", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: сделать удаление
+                Toast.makeText(context, "buttonOrderListDelete", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+        listViewClickable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderInfo.class);
+                intent.putExtra(Order.class.getSimpleName(), objects.get(position));
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.imageButtonOrderListEditSatus://TODO: сделать изменение статуса
-                System.out.println("imageButtonOrderListEditSatus");
-                break;
-            case R.id.buttonOrderListDelete://TODO: сделать удаление
-                System.out.println("buttonOrderListDelete");
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()){
+//            case R.id.imageButtonOrderListEditSatus:
+//                System.out.println("imageButtonOrderListEditSatus");
+//                break;
+//            case R.id.buttonOrderListDelete://TODO: сделать удаление
+//                System.out.println("buttonOrderListDelete");
+//                break;
+//            case R.id.linearLayoutOrderListListviewClickable:
+////                System.out.println("linearLayoutOrderListListviewClickable");
+////                Intent intent = new Intent(v.getContext(), OrderInfo.class);
+////
+////                intent.putExtra(Order.class.getSimpleName(), objects.get(this.position));
+////                startActivity(intent);
+//                break;
+//        }
+//    }
 }
