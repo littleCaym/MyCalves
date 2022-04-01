@@ -29,7 +29,7 @@ import com.example.calfcounting.orders.Order;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class CompoundInfo extends AppCompatActivity implements View.OnClickListener {
@@ -182,6 +182,9 @@ public class CompoundInfo extends AppCompatActivity implements View.OnClickListe
 
         //если не было
         if (!cursor.moveToFirst()){
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
             ContentValues cv = new ContentValues();
             cv.put(Order.ID, compound.getId());
             cv.put(Order.NAME, compound.getName());
@@ -195,11 +198,11 @@ public class CompoundInfo extends AppCompatActivity implements View.OnClickListe
 
             cv.put(Order.PRICE, Float.parseFloat(etAmountString));
             //current time of adding:
-            cv.put(Order.DATE_ADDED, String.valueOf(Calendar.getInstance().getTime()));
+            cv.put(Order.DATE_ADDED, dateFormat.format(new Date()));
             cv.put(Order.AMOUNT, Float.parseFloat(etPriceString));
             //time of arrival:
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            cv.put(Order.DATE_OF_ARRIVAL, String.valueOf(dateFormat.parse(etDateString)));
+
+            cv.put(Order.DATE_OF_ARRIVAL, etDateString);
             //status: добавлен
             cv.put(Order.STATUS, 0);
 

@@ -18,6 +18,7 @@ import com.example.calfcounting.DBHelper;
 import com.example.calfcounting.MainActivity;
 import com.example.calfcounting.R;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class OrderList extends AppCompatActivity implements AdapterView.OnItemCl
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query("ORDERS", null, null, null, null, null, null);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         if (cursor.moveToFirst()){
             do {
@@ -66,6 +67,7 @@ public class OrderList extends AppCompatActivity implements AdapterView.OnItemCl
                 order.setLocation(cursor.getString(cursor.getColumnIndex(Order.LOCATION)));
                 order.setLink_to_advert(cursor.getString(cursor.getColumnIndex(Order.LINK_TO_ADVERT)));
                 order.setPrice(cursor.getFloat(cursor.getColumnIndex(Order.PRICE)));
+                //TODO исправь здесь ошибку
                 try {
                     order.setDate_added(dateFormat.parse(
                             cursor.getString(
@@ -76,6 +78,7 @@ public class OrderList extends AppCompatActivity implements AdapterView.OnItemCl
                     e.printStackTrace();
                 }
                 order.setAmount(cursor.getFloat(cursor.getColumnIndex(Order.AMOUNT)));
+                //TODO исправь здесь ошибку
                 try {
                     order.setDate_of_arrival(dateFormat.parse(
                             cursor.getString(
@@ -99,6 +102,7 @@ public class OrderList extends AppCompatActivity implements AdapterView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        System.out.println("onItemClick");
         Intent intent = new Intent(this, OrderInfo.class);
         int i = (int) id;
 

@@ -29,7 +29,7 @@ public class OrderListArrayAdapter extends BaseAdapter implements View.OnClickLi
 
     @Override
     public int getCount() {
-        return 0;
+        return objects.size();
     }
 
     @Override
@@ -70,15 +70,18 @@ public class OrderListArrayAdapter extends BaseAdapter implements View.OnClickLi
         imageButtonEditStatus.setOnClickListener(this);
         buttonDelete.setOnClickListener(this);
 
-        return null;
+        return view;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imageButtonOrderListEditSatus://TODO: сделать изменение статуса
+                System.out.println("imageButtonOrderListEditSatus");
                 break;
             case R.id.buttonOrderListDelete://TODO: сделать удаление
+                System.out.println("buttonOrderListDelete");
+                break;
         }
     }
 }
