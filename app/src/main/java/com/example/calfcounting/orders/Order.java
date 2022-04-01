@@ -1,11 +1,11 @@
-package com.example.calfcounting.compounds;
+package com.example.calfcounting.orders;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Date;
 
-public class Compound implements Parcelable {
+public class Order implements Parcelable {
 
     public static final String ID = "ID";
     public static final String NAME = "NAME";
@@ -17,7 +17,11 @@ public class Compound implements Parcelable {
     public static final String LOCATION = "LOCATION";
     public static final String LINK_TO_ADVERT = "LINK_TO_ADVERT";
     public static final String PRICE = "PRICE";
-    public static final String CONNECTION_TIME = "CONNECTION_TIME";
+    public static final String DATE_ADDED = "DATE_ADDED";
+    public static final String AMOUNT = "AMOUNT";
+    public static final String DATE_OF_ARRIVAL = "DATE_OF_ARRIVAL";
+    public static final String STATUS = "STATUS";
+
     private long id;
     private String name;
     private String seller;
@@ -28,17 +32,20 @@ public class Compound implements Parcelable {
     private String location;
     private String link_to_advert;
     private float price;
-    private java.util.Date connection_time;
+    private java.util.Date date_added;
+    private float amount;
+    private java.util.Date date_of_arrival;
+    private int status; //0 - добавлен в список 1 - в пути 2 - прибыл 3 - отложен 4 - отменен
 
-    public static final Creator<Compound> CREATOR = new Creator<Compound>() {
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
         @Override
-        public Compound createFromParcel(Parcel in) {
-            return new Compound(in);
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
         }
 
         @Override
-        public Compound[] newArray(int size) {
-            return new Compound[size];
+        public Order[] newArray(int size) {
+            return new Order[size];
         }
     };
 
@@ -59,10 +66,13 @@ public class Compound implements Parcelable {
         dest.writeString(location);
         dest.writeString(link_to_advert);
         dest.writeFloat(price);
-        dest.writeLong(connection_time.getTime());//!!!!!!!!!!
+        dest.writeLong(date_added.getTime());
+        dest.writeFloat(amount);
+        dest.writeLong(date_of_arrival.getTime());
+        dest.writeInt(status);
     }
 
-    private Compound(Parcel source) {
+    private Order(Parcel source) {
         id = source.readLong();
         name = source.readString();
         seller = source.readString();
@@ -73,10 +83,14 @@ public class Compound implements Parcelable {
         location = source.readString();
         link_to_advert = source.readString();
         price = source.readFloat();
-        connection_time = new java.util.Date(source.readLong());
+        date_added = new java.util.Date(source.readLong());
+        amount = source.readFloat();
+        date_of_arrival = new java.util.Date(source.readLong());
+        status = source.readInt();
     }
 
-    public Compound() {
+
+    public Order() {
     }
 
     public long getId() {
@@ -111,6 +125,14 @@ public class Compound implements Parcelable {
         this.rating = rating;
     }
 
+    public String getUpload_advert_date() {
+        return upload_advert_date;
+    }
+
+    public void setUpload_advert_date(String upload_advert_date) {
+        this.upload_advert_date = upload_advert_date;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -135,20 +157,36 @@ public class Compound implements Parcelable {
         this.price = price;
     }
 
-    public String getUpload_advert_date() {
-        return upload_advert_date;
+    public Date getDate_added() {
+        return date_added;
     }
 
-    public void setUpload_advert_date(String upload_advert_date) {
-        this.upload_advert_date = upload_advert_date;
+    public void setDate_added(Date date_added) {
+        this.date_added = date_added;
     }
 
-    public Date getConnection_time() {
-        return connection_time;
+    public float getAmount() {
+        return amount;
     }
 
-    public void setConnection_time(Date connection_time) {
-        this.connection_time = connection_time;
+    public void setAmount(float amount) {
+        this.amount = amount;
+    }
+
+    public Date getDate_of_arrival() {
+        return date_of_arrival;
+    }
+
+    public void setDate_of_arrival(Date date_of_arrival) {
+        this.date_of_arrival = date_of_arrival;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getReviews_num() {
@@ -166,4 +204,17 @@ public class Compound implements Parcelable {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String getStatusString() {
+        switch (status){
+            case 0: return "Добавлен в заказы";
+            case 1: return "В пути";
+            case 2: return "Прибыл";
+            case 3: return "Отложен";
+            case 4: return "Отменен";
+            default: return "Не указан";
+        }
+
+    }
+
 }

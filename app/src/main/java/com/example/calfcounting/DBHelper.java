@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.calfcounting.compounds.Compound;
+import com.example.calfcounting.orders.Order;
 
 import java.util.Date;
 
@@ -113,6 +114,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CONNECTION_TIME" + " date" +
                 ");"
         );
+
+        db.execSQL("DROP TABLE IF EXISTS "+"GOODS_DATABASE"+"."+"ORDERS"+";");
+        db.execSQL("CREATE TABLE "+"ORDERS"+"(" +
+                        Order.ID + " INTEGER primary key autoincrement," +
+                        Order.NAME + " VARCHAR(255)," +
+                        Order.PRICE + " float," +
+                        Order.SELLER + " VARCHAR(255)," +
+                        Order.RATING + " FLOAT," +
+                        Order.REVIEWS_NUM + " INT," +
+                        Order.LINK_TO_ADVERT + " text," +
+                        Order.UPLOAD_ADVERT_DATE + " VARCHAR(255)," +
+                        Order.DESCRIPTION + " text," +
+                        Order.LOCATION + " VARCHAR(255)," +
+                        Order.DATE_ADDED + " date," +
+                        Order.AMOUNT + " FLOAT,"+
+                        Order.DATE_OF_ARRIVAL + " date," +
+                        Order.STATUS + " INTEGER" +
+                        ");"
+                );
 
 //        db.execSQL("create table compounds("
 //                + "id integer primary key autoincrement,"
@@ -1142,6 +1162,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(Compound.SELLER, "Евгения");
         cv.put(Compound.PRICE, 500.0);
         cv.put(Compound.RATING, 3.4);
+        cv.put(Compound.LINK_TO_ADVERT, "https://m.avito.ru/voskresensk/tovary_dlya_zhivotnyh/kombikorm_dlya_krsmrs_2062663337");
         cv.put(Compound.DESCRIPTION, "//// ПРИМЕР ОПИСАНИЯ //// \n" +
                 "Предлагаем Вашему вниманию полнорационный комбикорм класса люкс 100% качество. " +
                 "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +

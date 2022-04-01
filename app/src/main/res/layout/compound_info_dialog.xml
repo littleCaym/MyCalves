@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="#2F4CAF50"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Добавить комбикорм в заказ?"
+        android:textColor="#0C0C0C"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Количество комбикорма (в кг):"
+        android:textColor="#0E0A0A"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextCompoundInfoDialogAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:hint="Введите количество"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Стоимость заказа:"
+        android:textColor="#0E0A0A"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextCompoundInfoDialogPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:hint="Введите стоимость"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Ожидаемая дата получения:"
+        android:textColor="#0E0A0A"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextCompoundInfoDialogDateOfArrival"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:hint="Введите дату"
+        android:inputType="date" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonCompoundInfoDialogCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:background="#F44336"
+            android:text="ОТМЕНИТЬ"
+            android:textColor="#FFFFFFFF" />
+
+        <Button
+            android:id="@+id/buttonCompoundInfoDialogAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="#4CAF50"
+            android:text="ДОБАВИТЬ"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>

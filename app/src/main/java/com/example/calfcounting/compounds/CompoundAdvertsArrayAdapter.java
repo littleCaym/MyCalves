@@ -51,7 +51,7 @@ public class CompoundAdvertsArrayAdapter extends BaseAdapter {
         TextView textViewSeller = view.findViewById(R.id.textViewCompoundAdvertsSeller);
         RatingBar ratingBarRating = view.findViewById(R.id.ratingBarCompoundAdvertsRating);
         TextView textViewRating = view.findViewById(R.id.textViewCompoundAdvertsRating);
-        TextView textViewReviewsNum = view.findViewById(R.id.textViewCompoundAdvertsReviewsNum);
+        TextView textViewReviewsNum = view.findViewById(R.id.textViewCompoundAdvertsNum);
         TextView textViewPrice = view.findViewById(R.id.textViewCompoundAdvertsPrice);
 
         textViewName.setText(objects.get(position).getName());

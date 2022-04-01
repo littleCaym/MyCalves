@@ -6,16 +6,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calfcounting.DBHelper;
+import com.example.calfcounting.MainActivity;
 import com.example.calfcounting.R;
+import com.example.calfcounting.orders.OrderList;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -86,8 +90,10 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
                         compound.setName(cursor.getString(cursor.getColumnIndex(Compound.NAME)));
                         compound.setSeller(cursor.getString(cursor.getColumnIndex(Compound.SELLER)));
                         compound.setRating(cursor.getFloat(cursor.getColumnIndex(Compound.RATING)));
+                        compound.setReviews_num(cursor.getInt(cursor.getColumnIndex(Compound.REVIEWS_NUM)));
                         compound.setUpload_advert_date(cursor.getString(cursor.getColumnIndex(Compound.UPLOAD_ADVERT_DATE)));
                         compound.setDescription(cursor.getString(cursor.getColumnIndex(Compound.DESCRIPTION)));
+                        compound.setLocation(cursor.getString(cursor.getColumnIndex(Compound.LOCATION)));
                         compound.setLink_to_advert(cursor.getString(cursor.getColumnIndex(Compound.LINK_TO_ADVERT)));
                         compound.setPrice(cursor.getFloat(cursor.getColumnIndex(Compound.PRICE)));
 
@@ -115,18 +121,22 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
 
         intent.putExtra(Compound.class.getSimpleName(), (Parcelable) compoundArrayList.get(i));
         startActivity(intent);
+    }
 
-//        Intent intent = new Intent(this, IllnessesInfo.class);
-//        //нужно передать инфу по выбранному
-//        //найдем нужное
-//        int i = (int) id;
-//
-//        intent.putExtra("id", i);
-//        intent.putExtra("name", illnessesArrayList.get(i).getName());
-//        intent.putExtra("symptoms", illnessesArrayList.get(i).getSymptoms());
-//        intent.putExtra("description", illnessesArrayList.get(i).getDescription());
-//        intent.putExtra("treatment", illnessesArrayList.get(i).getTreatment());
-//
-//        startActivity(intent);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.button_home:
+                Intent intent = new Intent(this, MainActivity.class);
+                finish();
+                startActivity(intent);
+                break;
+            case R.id.button_purchases:
+                Intent intent1 = new Intent(this, OrderList.class);
+                finish();
+                startActivity(intent1);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

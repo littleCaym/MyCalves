@@ -48,7 +48,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textViewCompoundAdvertsReviewsNum"
+            android:id="@+id/textViewCompoundAdvertsNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="2dp"

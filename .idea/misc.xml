@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/drawable-anydpi/not_enough.xml" value="0.1890625" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/drawable/ic_update_12.xml" value="0.1046875" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout-v23/order_list_listview_layout.xml" value="0.2546875" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_animal.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_compound_adverts.xml" value="0.2" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_compound_adverts2.xml" value="0.2171875" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_compound_info.xml" value="0.42484795829713295" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_compound_info3.xml" value="0.2171875" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_day_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_food.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_food_info.xml" value="0.1" />
@@ -20,17 +25,21 @@
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_med_kit.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_medicine.xml" value="0.1" />
-        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_medicine_info.xml" value="0.1" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_medicine_info.xml" value="0.268" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_my_animals.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_order_list.xml" value="0.17291666666666666" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_order_list_array_adapter.xml" value="0.1" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_ration_info.xml" value="0.1" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_rations.xml" value="0.1" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/activity_ware_house.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/animals_list_layout.xml" value="0.1" />
-        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/compound_adverts_listview_layout.xml" value="0.6" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/compound_adverts_listview_layout.xml" value="0.1" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/compound_info_dialog.xml" value="0.268" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/daylist_listview_layout.xml" value="0.1" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/illnesses_list_layout.xml" value="0.1" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/med_kit_list_layout.xml" value="0.1" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/my_adapter_layout.xml" value="0.1" />
+        <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/order_list_listview_layout.xml" value="0.44000000000000006" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/layout/ware_house_list_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/menu/menu1.xml" value="0.268" />
         <entry key="..\:/Users/Alexander/Documents/Diplom/app/src/main/res/menu/menu_compounds.xml" value="0.2546875" />
