@@ -1,16 +1,36 @@
 package com.example.calfcounting;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.calfcounting.compounds.Compound;
 import com.example.calfcounting.orders.Order;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class DBHelper extends SQLiteOpenHelper {
+
+    public static final String dayList = "dayList";
+    public static final String myAnimals = "myAnimals";
+    public static final String myWareHouse = "myWareHouse";
+    public static final String myRecepts = "myRecepts";
+    public static final String rations = "rations";
+    public static final String aptechka = "aptechka";
+    public static final String COMPOUNDS ="COMPOUNDS";
+    public static final String ORDERS = "ORDERS";
+    public static final String illnesses = "illnesses";
+
 
     public DBHelper(Context context) {
         // конструктор суперкласса
@@ -146,24 +166,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //                + "connection_time date"
 //                +");");
 
-        /*
-        db.execSQL("DROP TABLE IF EXISTS "+"GOODS_DATABASE"+"."+"GOODS_AVITO"+";");
-        db.execSQL("CREATE TABLE "+"GOODS_AVITO"+"(" +
-                "ID" + " INTEGER primary key autoincrement," +
-                "TITLE" + " VARCHAR(255)," +
-                "PRICE" + " float," +
-                "BRAND" + " VARCHAR(255)," +
-                "BRAND_RATING" + " FLOAT," +
-                "REVIEWS_NUM" + " INT," +
-                "LINK" + " text," +
-                "DATE_UPLOAD" + " VARCHAR(255)," +
-                "DESCRIPTION" + " text," +
-                "LOCATION" + " VARCHAR(255)," +
-                "DATE_VIEWED" + " date" +
-                ");"
-        );
 
-         */
 
 
         setStartDayListList(db);
@@ -182,6 +185,144 @@ public class DBHelper extends SQLiteOpenHelper {
 //        db.execSQL("DROP DATABAS");
 //        onCreate(db);
     }
+
+    @SuppressLint("Range")
+    public static HashMap<ArrayList<Compound>, Date> getCompoundArrayListFromDB(SQLiteDatabase db, String orderBy){
+        ArrayList<Compound> compoundArrayList = new ArrayList<>();
+
+        //получаем дату последнего обновления
+//        DBHelper dbHelper = new DBHelper(context);
+//        SQLiteDatabase db = dbHelper.getReadableDatabase(); //new!!!!
+        @SuppressLint("Recycle") Cursor cursor = db.query("COMPOUNDS", null, null, null, null, null, orderBy);
+        cursor.moveToLast(); //На последний
+
+
+        String lastUpdateString= cursor.getString(
+                cursor.getColumnIndex(
+                        Compound.CONNECTION_TIME));
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //todo: поменять формат
+        java.util.Date lastUpdate = null;
+        try {
+            lastUpdate = dateFormat.parse(
+                    lastUpdateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //Дергаем из БД последнее
+        if (cursor.moveToFirst()){
+            do{
+                Compound compound = new Compound();
+
+                compound.setConnection_time(new Timestamp(
+                        cursor.getLong(
+                                cursor.getColumnIndex(Compound.CONNECTION_TIME)
+                        )
+                ));
+//                compound.setConnection_time(
+//                        new java.sql.Date(
+//                                cursor.getLong(
+//                                        cursor.getColumnIndex(Compound.CONNECTION_TIME))));
+                if (compound.getConnection_time() != null){ //TODO: лучше отказаться
+
+                    compound.setId(cursor.getLong(cursor.getColumnIndex(Compound.ID)));
+                    compound.setName(cursor.getString(cursor.getColumnIndex(Compound.NAME)));
+                    compound.setSeller(cursor.getString(cursor.getColumnIndex(Compound.SELLER)));
+                    compound.setRating(cursor.getFloat(cursor.getColumnIndex(Compound.RATING)));
+                    compound.setReviews_num(cursor.getInt(cursor.getColumnIndex(Compound.REVIEWS_NUM)));
+                    compound.setUpload_advert_date(cursor.getString(cursor.getColumnIndex(Compound.UPLOAD_ADVERT_DATE)));
+                    compound.setDescription(cursor.getString(cursor.getColumnIndex(Compound.DESCRIPTION)));
+                    compound.setLocation(cursor.getString(cursor.getColumnIndex(Compound.LOCATION)));
+                    compound.setLink_to_advert(cursor.getString(cursor.getColumnIndex(Compound.LINK_TO_ADVERT)));
+                    compound.setPrice(cursor.getFloat(cursor.getColumnIndex(Compound.PRICE)));
+
+                    compoundArrayList.add(compound);
+                }
+            } while (cursor.moveToNext());
+        }
+
+        HashMap<ArrayList<Compound>, Date> map = new HashMap<>();
+        map.put(compoundArrayList, lastUpdate);
+
+        if (lastUpdate != null){
+            //TODO: нужен Тост о том, что парсинг сейчас не получился. Но на 3 попытку.
+        }
+
+        return map;
+    }
+
+
+    public static boolean addCompoundArrayListToDB(Context context, ArrayList<Compound> compoundArrayList){
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        try {
+            for (int i = 0; i < compoundArrayList.size(); i++) {
+                cv = new ContentValues();
+                cv.put(Compound.ID, compoundArrayList.get(i).getId());
+                cv.put(Compound.NAME, compoundArrayList.get(i).getName());
+                cv.put(Compound.SELLER, compoundArrayList.get(i).getSeller());
+                cv.put(Compound.RATING, compoundArrayList.get(i).getRating());
+                cv.put(Compound.REVIEWS_NUM, compoundArrayList.get(i).getReviews_num());
+                cv.put(Compound.UPLOAD_ADVERT_DATE, compoundArrayList.get(i).getUpload_advert_date());
+                cv.put(Compound.DESCRIPTION, compoundArrayList.get(i).getDescription());
+                cv.put(Compound.LOCATION, compoundArrayList.get(i).getLocation());;
+                cv.put(Compound.LINK_TO_ADVERT, compoundArrayList.get(i).getLink_to_advert());
+                cv.put(Compound.PRICE, compoundArrayList.get(i).getPrice());
+                cv.put(Compound.CONNECTION_TIME, compoundArrayList.get(i).getConnection_time().getTime()); //todo: check
+
+                db.insert(DBHelper.COMPOUNDS, null, cv);
+            }
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean deleteAllFromCompoundTable(Context context){
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try{
+            db.delete(DBHelper.COMPOUNDS,null, null);
+            return true;
+        }catch (SQLException sqlException){
+            sqlException.printStackTrace();
+            return false;
+        }
+    }
+    @SuppressLint({"Range", "SimpleDateFormat", "Recycle"})
+    public static long getLastTimeStampsLong(SQLiteDatabase db){
+
+       // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //todo: поменять формат
+
+        try {
+             Cursor cursor = db.query(
+                    DBHelper.COMPOUNDS,
+                    new String[]{Compound.CONNECTION_TIME},
+                    Compound.ID+"=?",
+                    new String[]{String.valueOf(1)},
+                    null,null,null
+            );
+            Timestamp timestamp;
+           // Date timeStampDate;
+            if (cursor.moveToFirst()) {
+                timestamp = new Timestamp(cursor.getLong(cursor.getColumnIndex(Compound.CONNECTION_TIME)));
+                Log.d("MyLog","Последний таймстамп СТРИНГ "+ cursor.getString(cursor.getColumnIndex(Compound.CONNECTION_TIME)));
+                Log.d("MyLog", "Последний таймстамп long "+ timestamp.getTime());
+            } else{
+                return new Date(0).getTime();
+            }
+
+            return timestamp.getTime();
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
+            return 0;
+        }
+    }
+
 
     public void setStartDayListList(SQLiteDatabase db){
         ContentValues cv = new ContentValues();
@@ -1157,7 +1298,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void setStartCompoundsList(SQLiteDatabase db) {
 
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         ContentValues cv = new ContentValues();
+
+
         cv.put(Compound.NAME, "Комбикорм для крс,мрс");
         cv.put(Compound.SELLER, "Евгения");
         cv.put(Compound.PRICE, 500.0);
@@ -1169,7 +1314,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
                 "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
         cv.put(Compound.UPLOAD_ADVERT_DATE, "Вчера в 19:57");
-        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        cv.put(Compound.CONNECTION_TIME, timestamp.getTime()); //todo check
         db.insert("compounds", null, cv);
 
         cv = new ContentValues();
@@ -1182,7 +1327,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
                 "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
                 "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
-        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        cv.put(Compound.CONNECTION_TIME, timestamp.getTime()); //todo check
         db.insert("compounds", null, cv);
 
         cv = new ContentValues();
@@ -1195,7 +1340,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
                 "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
                 "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
-        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        cv.put(Compound.CONNECTION_TIME, timestamp.getTime()); //todo check
         db.insert("compounds", null, cv);
 
         cv = new ContentValues();
@@ -1207,7 +1352,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
                 "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
                 "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
-        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        cv.put(Compound.CONNECTION_TIME, timestamp.getTime()); //todo check
         db.insert("compounds", null, cv);
 
         cv = new ContentValues();
@@ -1219,7 +1364,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
                 "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
                 "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
-        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        cv.put(Compound.CONNECTION_TIME, timestamp.getTime()); //todo check
         db.insert("compounds", null, cv);
 
         cv = new ContentValues();
@@ -1231,7 +1376,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
                 "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
                 "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
-        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        cv.put(Compound.CONNECTION_TIME, timestamp.getTime()); //todo check
         db.insert("compounds", null, cv);
 
         cv = new ContentValues();
@@ -1243,8 +1388,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Для гусей, уток, бройлеров, кур несушек, а также для КРС, кроликов, свиней. " +
                 "Зерно и зерно смеси пшеница, овёс, кукуруза, кукуруза дроблёная и т д. Доставка " +
                 "по г. Клин и Клинскому р-ну абсолютно бесплатно.");
-        cv.put(Compound.CONNECTION_TIME, "2021-10-12");
+        cv.put(Compound.CONNECTION_TIME, timestamp.getTime()); //todo check
         db.insert("compounds", null, cv);
-
     }
 }

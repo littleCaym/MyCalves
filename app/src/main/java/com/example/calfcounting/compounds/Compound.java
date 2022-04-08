@@ -3,7 +3,7 @@ package com.example.calfcounting.compounds;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Compound implements Parcelable {
 
@@ -28,7 +28,7 @@ public class Compound implements Parcelable {
     private String location;
     private String link_to_advert;
     private float price;
-    private java.util.Date connection_time;
+    private Timestamp connection_time;
 
     public static final Creator<Compound> CREATOR = new Creator<Compound>() {
         @Override
@@ -73,7 +73,7 @@ public class Compound implements Parcelable {
         location = source.readString();
         link_to_advert = source.readString();
         price = source.readFloat();
-        connection_time = new java.util.Date(source.readLong());
+        connection_time = new Timestamp(source.readLong());
     }
 
     public Compound() {
@@ -143,11 +143,11 @@ public class Compound implements Parcelable {
         this.upload_advert_date = upload_advert_date;
     }
 
-    public Date getConnection_time() {
+    public Timestamp getConnection_time() {
         return connection_time;
     }
 
-    public void setConnection_time(Date connection_time) {
+    public void setConnection_time(Timestamp connection_time) {
         this.connection_time = connection_time;
     }
 

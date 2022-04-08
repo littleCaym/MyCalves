@@ -192,18 +192,18 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/buttonCompoundInfoToPurchase"
+            android:id="@+id/buttonOrderInfoDelete"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/ic_where_to_buy"
+            android:background="@drawable/icons8_trash_60"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Добавить"
+            android:text="Удалить"
             android:textStyle="bold" />
     </LinearLayout>
 

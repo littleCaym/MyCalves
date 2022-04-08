@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="http_host">http://</string>
+    <string name="https_host">https://</string>
+    <string name="server_page_avito">/avito</string>
+    <string name="my_notebook_local_ip_and_port">192.168.1.94:8080</string>
+</resources>

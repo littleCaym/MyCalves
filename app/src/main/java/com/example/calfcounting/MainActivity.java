@@ -1,5 +1,6 @@
 package com.example.calfcounting;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.example.calfcounting.compounds.CompoundAdverts;
 import com.example.calfcounting.dayList.DayList;
@@ -16,9 +19,9 @@ import com.example.calfcounting.medkit.MedKit;
 import com.example.calfcounting.myAnimals.MyAnimals;
 import com.example.calfcounting.rations.Rations;
 import com.example.calfcounting.warehouse.WareHouse;
-import com.facebook.stetho.Stetho;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
 
     Toolbar toolbar;
 
@@ -30,12 +33,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button spravochnikBolezney_button;
     Button compoundAdverts_button;
 
+//    Compound compound;
+//    ArrayList<Compound> compoundArrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startStetho();
+
+        //TODO startService(new Intent(this, ServerConnectionService.class));
+        //Как связать со спрингом https://www.youtube.com/watch?v=ev3-y9G8N70&ab_channel=GenuineCoder
+        //но мы будем тупо фоново парсить
+        //так что вот тут вот возьмем все https://www.youtube.com/watch?v=SQ7oWE0yJkE&ab_channel=NowAndroid
+        // или тут http://developer.alexanderklimov.ru/android/library/jsoup.php
+        //Будем делать через jsoup
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Главное меню");
@@ -61,8 +73,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         compoundAdverts_button = findViewById(R.id.button_compound_adverts);
         compoundAdverts_button.setOnClickListener(this);
 
+        OneTimeWorkRequest myWorkRequest = new OneTimeWorkRequest.Builder(WorkerParseJSON.class).build();
+        WorkManager.getInstance(this).enqueue(myWorkRequest);
+
+        //startServerConnectionService();
+
     }
 
+
+
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -97,28 +117,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
-    private void startStetho(){
-        // Create an InitializerBuilder
-        Stetho.InitializerBuilder initializerBuilder =
-                Stetho.newInitializerBuilder(this);
-
-        // Enable Chrome DevTools
-        initializerBuilder.enableWebKitInspector(
-                Stetho.defaultInspectorModulesProvider(this)
-        );
-
-        // Enable command line interface
-        initializerBuilder.enableDumpapp(
-                Stetho.defaultDumperPluginsProvider(this)
-        );
-
-        // Use the InitializerBuilder to generate an Initializer
-        Stetho.Initializer initializer = initializerBuilder.build();
-
-        // Initialize Stetho with the Initializer
-        Stetho.initialize(initializer);
-    }
-
-
 }
