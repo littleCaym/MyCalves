@@ -68,16 +68,25 @@ public class WorkerParseJSON extends Worker{
     @NonNull
     @Override
     public Result doWork() {
-        //Отображаем пользователю статус выполнения процесса
 
+        //Смотрим, откуда был вызван воркер
+        //MainActivity.class.getSimpleName() или CompoundAdverts.class.getSimpleName()
+        String activityString = getInputData().getString("activity");
+
+        //Отображаем пользователю статус выполнения процесса
         handler = new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                Toast.makeText(context, processStatus, Toast.LENGTH_SHORT).show();
+                switch (msg.what){
+                    case 0:
+                    case 1:
+                    case 2: Toast.makeText(context, (String) msg.obj, Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
             }
         };
-
 
 
         //DB must be opened once!!!!
@@ -86,45 +95,45 @@ public class WorkerParseJSON extends Worker{
 
         //check internet connection
         if (isInternetAvailable()){
-            //check the time
-            if (checkTheTime(db)){
-                processStatus = START_SERVICE_MESSAGE;
-                handler.obtainMessage(1,START_SERVICE_MESSAGE).sendToTarget();
-                Log.d("MyLOG", START_SERVICE_MESSAGE);
-                //download data from Server
-                HashMap<Boolean, ArrayList<Compound>> serverData = parseJsonFromMyServer();
-                if (serverData.containsKey(true)) {
-                    ArrayList<Compound> compoundArrayList = serverData.get(true);
-                    //If we got any data
-                    if (!Objects.requireNonNull(compoundArrayList).isEmpty()) {
-                        //clear previous table of Compounds
-                        if (DBHelper.deleteAllFromCompoundTable(context)) {
-                            //add arrayList to DataBase
-                            //Отправляем сообщение о финише
-                            if (DBHelper.addCompoundArrayListToDB(context, compoundArrayList)) {
-                                processStatus = FINISH_SERVICE_MESSAGE;
-                                handler.obtainMessage(2,FINISH_SERVICE_MESSAGE).sendToTarget();
-                                Log.d("MyLOG", FINISH_SERVICE_MESSAGE);
-                                return Result.success();
-                            }
-                        } else {
-                            Log.d("MyLog", "Проблемы с удалением из ДБ");
+            if (activityString.equals(MainActivity.class.getSimpleName())){
+                //check the time
+                if (checkTheTime(db)) {
+                    handler.obtainMessage(1, START_SERVICE_MESSAGE).sendToTarget();
+                    Log.d("MyLOG", START_SERVICE_MESSAGE);
+                }
+                else {
+                    Log.d("MyLog", "Время не наступило");
+                    return Result.success();}
+            }
+            //download data from Server
+            HashMap<Boolean, ArrayList<Compound>> serverData = parseJsonFromMyServer();
+            if (serverData.containsKey(true)) {
+                ArrayList<Compound> compoundArrayList = serverData.get(true);
+                //If we got any data
+                if (!Objects.requireNonNull(compoundArrayList).isEmpty()) {
+                    //clear previous table of Compounds
+                    if (DBHelper.deleteAllFromCompoundTable(context)) {
+                        //add arrayList to DataBase
+                        //Отправляем сообщение о финише
+                        if (DBHelper.addCompoundArrayListToDB(context, compoundArrayList)) {
+                            handler.obtainMessage(2,FINISH_SERVICE_MESSAGE).sendToTarget();
+                            Log.d("MyLOG", FINISH_SERVICE_MESSAGE);
+                            return Result.success();
                         }
                     } else {
-                        processStatus = WARNING_NO_DATA_FROM_SERVER;
-                        handler.obtainMessage(0,WARNING_NO_DATA_FROM_SERVER).sendToTarget();
-                        Log.d("MyLog", WARNING_NO_DATA_FROM_SERVER);
+                        Log.d("MyLog", "Проблемы с удалением из ДБ");
                     }
                 } else {
-                    processStatus = WARNING_SERVER_NO_RESPONSE;
-                    handler.obtainMessage(0,WARNING_SERVER_NO_RESPONSE).sendToTarget();
-                    Log.d("MyLog", WARNING_SERVER_NO_RESPONSE);
+                    handler.obtainMessage(0,WARNING_NO_DATA_FROM_SERVER).sendToTarget();
+                    Log.d("MyLog", WARNING_NO_DATA_FROM_SERVER);
                 }
-            }else {Log.d("MyLog", "Время не наступило");}
+            } else {
+                handler.obtainMessage(0,WARNING_SERVER_NO_RESPONSE).sendToTarget();
+                Log.d("MyLog", WARNING_SERVER_NO_RESPONSE);
+            }
         } else{
-            processStatus = WARNING_NO_INTERNET_CONNECTION;
             handler.obtainMessage(0,WARNING_NO_INTERNET_CONNECTION).sendToTarget();
-            Log.d("MyLog", WARNING_NO_INTERNET_CONNECTION);
+         Log.d("MyLog", WARNING_NO_INTERNET_CONNECTION);
         }
 
         //todo add Splash if thread is alive while moving to CompoundAdverts activity

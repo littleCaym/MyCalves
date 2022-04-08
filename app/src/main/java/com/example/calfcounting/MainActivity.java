@@ -9,6 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
@@ -73,7 +74,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         compoundAdverts_button = findViewById(R.id.button_compound_adverts);
         compoundAdverts_button.setOnClickListener(this);
 
-        OneTimeWorkRequest myWorkRequest = new OneTimeWorkRequest.Builder(WorkerParseJSON.class).build();
+        OneTimeWorkRequest myWorkRequest = new OneTimeWorkRequest.Builder(WorkerParseJSON.class)
+                .setInputData(
+                        new Data.Builder().putString(
+                                "activity", MainActivity.class.getSimpleName()
+                        ).build()
+                ).build();
         WorkManager.getInstance(this).enqueue(myWorkRequest);
 
         //startServerConnectionService();

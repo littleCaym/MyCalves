@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +18,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import com.example.calfcounting.DBHelper;
 import com.example.calfcounting.MainActivity;
 import com.example.calfcounting.R;
+import com.example.calfcounting.WorkerParseJSON;
 import com.example.calfcounting.orders.OrderList;
 
 import java.sql.Timestamp;
@@ -37,6 +44,8 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
     SQLiteDatabase db;
 
     ArrayList<Compound> compoundArrayList;
+
+    OneTimeWorkRequest oneTimeWorkRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +152,31 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
                 finish();
                 startActivity(intent1);
                 break;
+            case R.id.button_update:
+                oneTimeWorkRequest = new OneTimeWorkRequest.Builder(WorkerParseJSON.class)
+                        .setInputData(
+                                new Data.Builder()
+                                        .putString("activity", CompoundAdverts.class.getSimpleName())
+                                        .build()
+                        ).build();
+                WorkManager.getInstance(this).enqueue(oneTimeWorkRequest);
+
+
+                //Обновляем страницу
+                WorkManager
+                        .getInstance(this)
+                        .getWorkInfoByIdLiveData(oneTimeWorkRequest.getId())
+                        .observe(this, new Observer<WorkInfo>() {
+                            @Override
+                            public void onChanged(WorkInfo workInfo) {
+                                Log.d("MyLog", workInfo.getState().name());
+                                if (workInfo.getState() == WorkInfo.State.SUCCEEDED){
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            }
+                        });
+
         }
         return super.onOptionsItemSelected(item);
     }
