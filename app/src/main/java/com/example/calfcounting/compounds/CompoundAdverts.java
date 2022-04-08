@@ -74,10 +74,7 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
         Cursor cursor = db.query("COMPOUNDS", null, null, null, null, null, orderBy);
         cursor.moveToLast(); //На последний
 
-
-//        String lastUpdateString= cursor.getString(
-//                cursor.getColumnIndex(
-//                        Compound.CONNECTION_TIME));
+        //Выводим дату и время последнего обновления
         Calendar lastUpdateCalendar = new GregorianCalendar();
         lastUpdateCalendar.setTimeInMillis(
                 cursor.getLong(cursor.getColumnIndex(Compound.CONNECTION_TIME))
@@ -89,8 +86,6 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
                 +lastUpdateCalendar.get(Calendar.HOUR_OF_DAY) + ":"
                 + lastUpdateCalendar.get(Calendar.MINUTE)
         );
-
-         //TODO: нужен вывод времени
 
         //Дергаем из БД последнее
         if (cursor.moveToFirst()){

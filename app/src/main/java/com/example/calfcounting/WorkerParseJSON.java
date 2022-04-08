@@ -186,7 +186,7 @@ public class WorkerParseJSON extends Worker{
                 return true;
             }
             //Обновление было в пределах установленного времени?
-            return !currentLocalTime.isAfter(secondUpdateOfDay) && !currentLocalTime.isBefore(firstUpdateOfDay);
+            return lastUpdateLocalTime.isAfter(firstUpdateOfDay) && lastUpdateLocalTime.isBefore(secondUpdateOfDay);
         }
 
     }
