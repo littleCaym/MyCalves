@@ -136,7 +136,6 @@ public class WorkerParseJSON extends Worker{
          Log.d("MyLog", WARNING_NO_INTERNET_CONNECTION);
         }
 
-        //todo add Splash if thread is alive while moving to CompoundAdverts activity
         return Result.failure();
     }
 

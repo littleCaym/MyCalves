@@ -47,6 +47,9 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
 
     OneTimeWorkRequest oneTimeWorkRequest;
 
+    String dbSelection;
+    String[] dbSelectionArgs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +83,11 @@ public class CompoundAdverts extends AppCompatActivity implements AdapterView.On
         //получаем дату последнего обновления
         dbHelper = new DBHelper(context);
         db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query("COMPOUNDS", null, null, null, null, null, orderBy);
+
+        //Выделяем ограничения по цене
+        dbSelection = Compound.PRICE +">=?";
+        dbSelectionArgs =new String[] {String.valueOf(100)};
+        Cursor cursor = db.query("COMPOUNDS", null, dbSelection, dbSelectionArgs, null, null, orderBy);
         cursor.moveToLast(); //На последний
 
         //Выводим дату и время последнего обновления
