@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.calfcounting.DBHelper;
 import com.example.calfcounting.R;
 
 import java.util.ArrayList;
@@ -87,29 +88,26 @@ public class OrderListArrayAdapter extends BaseAdapter {
         LinearLayout listViewClickable = view.findViewById(R.id.linearLayoutOrderListListviewClickable);
 
         imageButtonEditStatus
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //TODO: сделать изменение статуса
-                        Toast.makeText(context, "imageButtonOrderListEditSatus", Toast.LENGTH_SHORT)
-                                .show();
-                    }
+                .setOnClickListener(v -> {
+                    //TODO: сделать изменение статуса
+                    Toast.makeText(context, "imageButtonOrderListEditSatus", Toast.LENGTH_SHORT)
+                            .show();
                 });
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: сделать удаление
-                Toast.makeText(context, "buttonOrderListDelete", Toast.LENGTH_SHORT)
-                        .show();
-            }
+        buttonDelete.setOnClickListener(v -> {
+            //TODO: сделать удаление
+                boolean flag = DBHelper.deleteOrder(context, position);
+                if (flag){
+                    Toast.makeText(context, "Заказ удален", Toast.LENGTH_SHORT)
+                            .show();
+                    objects.remove(position);
+                    this.notifyDataSetChanged();
+                }
+
         });
-        listViewClickable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, OrderInfo.class);
-                intent.putExtra(Order.class.getSimpleName(), objects.get(position));
-                context.startActivity(intent);
-            }
+        listViewClickable.setOnClickListener(v -> {
+            Intent intent = new Intent(context, OrderInfo.class);
+            intent.putExtra(Order.class.getSimpleName(), objects.get(position));
+            context.startActivity(intent);
         });
 
         return view;

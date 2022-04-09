@@ -1,5 +1,6 @@
 package com.example.calfcounting.orders;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -32,6 +33,7 @@ public class OrderList extends AppCompatActivity implements AdapterView.OnItemCl
 
     ArrayList<Order> orderArrayList;
 
+    @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

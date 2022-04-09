@@ -292,6 +292,19 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    public static boolean deleteOrder(Context context, long id){
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try{
+            db.delete(DBHelper.ORDERS, Order.ID+"=?", new String[] {String.valueOf(id)});
+            return true;
+        }catch (SQLException sqlException){
+            sqlException.printStackTrace();
+            return false;
+        }
+    }
+
     @SuppressLint({"Range", "SimpleDateFormat", "Recycle"})
     public static long getLastTimeStampsLong(SQLiteDatabase db){
 
