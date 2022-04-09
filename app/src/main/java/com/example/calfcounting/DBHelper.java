@@ -13,6 +13,7 @@ import com.example.calfcounting.compounds.Compound;
 import com.example.calfcounting.orders.Order;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -293,11 +294,91 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public static boolean deleteOrder(Context context, long id){
+    public static boolean deleteOrderById(Context context, long id){
         DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         try{
             db.delete(DBHelper.ORDERS, Order.ID+"=?", new String[] {String.valueOf(id)});
+            return true;
+        }catch (SQLException sqlException){
+            sqlException.printStackTrace();
+            return false;
+        }
+    }
+
+    @SuppressLint("Range")
+    public static Order getOrderById(Context context, long id){
+
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query(DBHelper.ORDERS, null, Order.ID+"=?",  new String[] {String.valueOf(id)}, null, null, null);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Order order = new Order();
+        if (cursor.moveToFirst()){
+
+            order.setId(cursor.getLong(cursor.getColumnIndex(Order.ID)));
+            order.setName(cursor.getString(cursor.getColumnIndex(Order.NAME)));
+            order.setSeller(cursor.getString(cursor.getColumnIndex(Order.SELLER)));
+            order.setRating(cursor.getFloat(cursor.getColumnIndex(Order.RATING)));
+            order.setReviews_num(cursor.getInt(cursor.getColumnIndex(Order.REVIEWS_NUM)));
+            order.setUpload_advert_date(cursor.getString(cursor.getColumnIndex(Order.UPLOAD_ADVERT_DATE)));
+            order.setDescription(cursor.getString(cursor.getColumnIndex(Order.DESCRIPTION)));
+            order.setLocation(cursor.getString(cursor.getColumnIndex(Order.LOCATION)));
+            order.setLink_to_advert(cursor.getString(cursor.getColumnIndex(Order.LINK_TO_ADVERT)));
+            order.setPrice(cursor.getFloat(cursor.getColumnIndex(Order.PRICE)));
+            //TODO исправь здесь ошибку
+            try {
+                order.setDate_added(dateFormat.parse(
+                        cursor.getString(
+                                cursor.getColumnIndex(
+                                        Order.DATE_ADDED
+                                ))));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            order.setAmount(cursor.getFloat(cursor.getColumnIndex(Order.AMOUNT)));
+            //TODO исправь здесь ошибку
+            try {
+                order.setDate_of_arrival(dateFormat.parse(
+                        cursor.getString(
+                                cursor.getColumnIndex(
+                                        Order.DATE_OF_ARRIVAL
+                                ))));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            order.setStatus(cursor.getInt(cursor.getColumnIndex(Order.STATUS)));
+        }
+        return order;
+    }
+
+    public static boolean changeOrderStatusById(Context context, int status, long id){
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try{
+            Order order = getOrderById(context, id);
+            order.setStatus(status);
+
+            ContentValues cv = new ContentValues();
+            cv.put(Order.ID, order.getId());
+            cv.put(Order.NAME, order.getName());
+            cv.put(Order.SELLER, order.getSeller());
+            cv.put(Order.RATING, order.getRating());
+            cv.put(Order.REVIEWS_NUM, order.getReviews_num());
+            cv.put(Order.UPLOAD_ADVERT_DATE, order.getUpload_advert_date());
+            cv.put(Order.DESCRIPTION, order.getDescription());
+            cv.put(Order.LOCATION, order.getLocation());
+            cv.put(Order.LINK_TO_ADVERT, order.getLink_to_advert());
+            cv.put(Order.PRICE, order.getPrice());
+            cv.put(Order.DATE_ADDED, dateFormat.format(order.getDate_added()));
+            cv.put(Order.AMOUNT, order.getAmount());
+            cv.put(Order.DATE_OF_ARRIVAL, dateFormat.format(order.getDate_of_arrival()));
+            cv.put(Order.STATUS, order.getStatus());
+
+            db.update(DBHelper.ORDERS, cv, Order.ID+"=?",  new String[] {String.valueOf(id)});
             return true;
         }catch (SQLException sqlException){
             sqlException.printStackTrace();

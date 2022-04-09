@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="#2F4CAF50"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Статус заказа"
+        android:textColor="#0C0C0C"
+        android:textSize="24sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupOrderListDialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp">
+
+        <!-- //0 - добавлен в список 1 - в пути 2 - прибыл 3 - отложен 4 - отменен
+        -->
+        <RadioButton
+            android:id="@+id/radioButtonOrderListDialog0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Добавлен в список" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrderListDialog1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="В пути" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrderListDialog2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Прибыл" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrderListDialog3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Отложен" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrderListDialog4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Отменен" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonOrderListDialogCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:background="#F44336"
+            android:text="ОТМЕНА"
+            android:textColor="#FFFFFFFF" />
+
+        <Button
+            android:id="@+id/buttonOrderListDialogAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="#4CAF50"
+            android:text="Подтвердить"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

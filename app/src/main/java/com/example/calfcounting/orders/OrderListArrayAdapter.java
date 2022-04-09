@@ -1,16 +1,20 @@
 package com.example.calfcounting.orders;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,12 +94,14 @@ public class OrderListArrayAdapter extends BaseAdapter {
         imageButtonEditStatus
                 .setOnClickListener(v -> {
                     //TODO: сделать изменение статуса
-                    Toast.makeText(context, "imageButtonOrderListEditSatus", Toast.LENGTH_SHORT)
+                    showCustomDialog(position);
+
+                    Toast.makeText(context, "Статус обновлен", Toast.LENGTH_SHORT)
                             .show();
+
                 });
         buttonDelete.setOnClickListener(v -> {
-            //TODO: сделать удаление
-                boolean flag = DBHelper.deleteOrder(context, position);
+                boolean flag = DBHelper.deleteOrderById(context, objects.get(position).getId());
                 if (flag){
                     Toast.makeText(context, "Заказ удален", Toast.LENGTH_SHORT)
                             .show();
@@ -113,22 +119,64 @@ public class OrderListArrayAdapter extends BaseAdapter {
         return view;
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.imageButtonOrderListEditSatus:
-//                System.out.println("imageButtonOrderListEditSatus");
-//                break;
-//            case R.id.buttonOrderListDelete://TODO: сделать удаление
-//                System.out.println("buttonOrderListDelete");
-//                break;
-//            case R.id.linearLayoutOrderListListviewClickable:
-////                System.out.println("linearLayoutOrderListListviewClickable");
-////                Intent intent = new Intent(v.getContext(), OrderInfo.class);
-////
-////                intent.putExtra(Order.class.getSimpleName(), objects.get(this.position));
-////                startActivity(intent);
-//                break;
-//        }
-//    }
+    @SuppressLint("NonConstantResourceId")
+    private void showCustomDialog(int position){
+
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.order_list_dialog);
+
+        //0 - добавлен в список 1 - в пути 2 - прибыл 3 - отложен 4 - отменен
+        final RadioButton radioButton0 = dialog.findViewById(R.id.radioButtonOrderListDialog0);
+        final RadioButton radioButton1 = dialog.findViewById(R.id.radioButtonOrderListDialog1);
+        final RadioButton radioButton2 = dialog.findViewById(R.id.radioButtonOrderListDialog2);
+        final RadioButton radioButton3 = dialog.findViewById(R.id.radioButtonOrderListDialog3);
+        final RadioButton radioButton4 = dialog.findViewById(R.id.radioButtonOrderListDialog4);
+
+        final RadioGroup radioGroup = dialog.findViewById(R.id.radioGroupOrderListDialog);
+        /*
+        radioGroup.addView(radioButton0);
+        radioGroup.addView(radioButton1);
+        radioGroup.addView(radioButton2);
+        radioGroup.addView(radioButton3);
+        radioGroup.addView(radioButton4);
+
+         */
+
+        switch (objects.get(position).getStatus()){
+            case 0: radioButton0.setChecked(true); break;
+            case 1: radioButton1.setChecked(true); break;
+            case 2: radioButton2.setChecked(true); break;
+            case 3: radioButton3.setChecked(true); break;
+            case 4: radioButton4.setChecked(true); break;
+        }
+
+        final Button buttonAccept = dialog.findViewById(R.id.buttonOrderListDialogAccept);
+        final Button buttonCancel = dialog.findViewById(R.id.buttonOrderListDialogCancel);
+
+        buttonAccept.setOnClickListener(v -> {
+            int rg_id = 0;
+
+            switch (radioGroup.getCheckedRadioButtonId()){
+                case R.id.radioButtonOrderListDialog0: rg_id = 0; break;
+                case R.id.radioButtonOrderListDialog1: rg_id = 1; break;
+                case R.id.radioButtonOrderListDialog2: rg_id = 2; break;
+                case R.id.radioButtonOrderListDialog3: rg_id = 3; break;
+                case R.id.radioButtonOrderListDialog4: rg_id = 4; break;
+            }
+            boolean flag = DBHelper.changeOrderStatusById(context,
+                    rg_id,
+                    objects.get(position).getId());
+            if (flag) {
+                objects.get(position).setStatus(radioGroup.getCheckedRadioButtonId());
+                this.notifyDataSetChanged();
+            }
+            dialog.dismiss();
+
+        });
+        buttonCancel.setOnClickListener(v -> dialog.cancel());
+
+        dialog.show();
+    }
 }
