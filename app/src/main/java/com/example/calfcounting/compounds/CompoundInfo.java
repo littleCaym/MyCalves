@@ -29,7 +29,6 @@ import com.example.calfcounting.orders.Order;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 public class CompoundInfo extends AppCompatActivity implements View.OnClickListener {
@@ -184,7 +183,6 @@ public class CompoundInfo extends AppCompatActivity implements View.OnClickListe
         if (!cursor.moveToFirst()){
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
             ContentValues cv = new ContentValues();
             cv.put(Order.ID, compound.getId());
             cv.put(Order.NAME, compound.getName());
@@ -198,11 +196,11 @@ public class CompoundInfo extends AppCompatActivity implements View.OnClickListe
 
             cv.put(Order.PRICE, Float.parseFloat(etAmountString));
             //current time of adding:
-            cv.put(Order.DATE_ADDED, dateFormat.format(new Date()));
+            cv.put(Order.DATE_ADDED, System.currentTimeMillis());
             cv.put(Order.AMOUNT, Float.parseFloat(etPriceString));
             //time of arrival:
 
-            cv.put(Order.DATE_OF_ARRIVAL, etDateString);
+            cv.put(Order.DATE_OF_ARRIVAL, Objects.requireNonNull(dateFormat.parse(etDateString)).getTime());
             //status: добавлен
             cv.put(Order.STATUS, 0);
 
@@ -211,13 +209,13 @@ public class CompoundInfo extends AppCompatActivity implements View.OnClickListe
             db.close();
 
             Toast.makeText(
-                    CompoundInfo.this, "Комбикорм добавлен в заказы!", 3000
+                    CompoundInfo.this, "Комбикорм добавлен в заказы!", Toast.LENGTH_SHORT
             ).show();
         }
         //если уже было
         else{
             Toast.makeText(
-                    CompoundInfo.this, "Комбикорм уже есть в заказах!", 3000)
+                    CompoundInfo.this, "Комбикорм уже есть в заказах!", Toast.LENGTH_SHORT)
                     .show();
         }
 

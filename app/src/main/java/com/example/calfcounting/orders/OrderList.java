@@ -20,9 +20,9 @@ import com.example.calfcounting.MainActivity;
 import com.example.calfcounting.R;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OrderList extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
@@ -70,26 +70,18 @@ public class OrderList extends AppCompatActivity implements AdapterView.OnItemCl
                 order.setLink_to_advert(cursor.getString(cursor.getColumnIndex(Order.LINK_TO_ADVERT)));
                 order.setPrice(cursor.getFloat(cursor.getColumnIndex(Order.PRICE)));
                 //TODO исправь здесь ошибку
-                try {
-                    order.setDate_added(dateFormat.parse(
-                            cursor.getString(
-                                    cursor.getColumnIndex(
-                                            Order.DATE_ADDED
-                                    ))));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                order.setDate_added(new Date(
+                        cursor.getLong(
+                                cursor.getColumnIndex(
+                                        Order.DATE_ADDED
+                                ))));
                 order.setAmount(cursor.getFloat(cursor.getColumnIndex(Order.AMOUNT)));
                 //TODO исправь здесь ошибку
-                try {
-                    order.setDate_of_arrival(dateFormat.parse(
-                            cursor.getString(
-                                    cursor.getColumnIndex(
-                                            Order.DATE_OF_ARRIVAL
-                                    ))));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                order.setDate_of_arrival(new Date(
+                        cursor.getLong(
+                                cursor.getColumnIndex(
+                                        Order.DATE_OF_ARRIVAL
+                                ))));
                 order.setStatus(cursor.getInt(cursor.getColumnIndex(Order.STATUS)));
 
                 orderArrayList.add(order);
@@ -97,6 +89,7 @@ public class OrderList extends AppCompatActivity implements AdapterView.OnItemCl
         }
 
         OrderListArrayAdapter adapter = new OrderListArrayAdapter(this, orderArrayList);
+        adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 

@@ -96,7 +96,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textViewCompoundInfoPrice"
+                android:id="@+id/textViewOrderInfoPrice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
@@ -108,44 +108,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/buttonCompoundInfoLinkToAdvert"
+            android:id="@+id/buttonOrderInfoLinkToAdvert"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:text="Открыть на Авито" />
-
-        <TextView
-            android:id="@+id/textView26"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Описание:"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textViewOrderInfoDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Описание комбикорма"
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/textView29"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Дата загрузки объявления:"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textViewOrderInfoUploadAdvertDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="[00:00]"
-            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -161,23 +129,90 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textViewOrderListStatus"
+                android:id="@+id/textViewOrderInfoStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Состояние" />
 
             <ImageButton
-                android:id="@+id/imageButtonOrderListEditSatus"
+                android:id="@+id/imageButtonOrderInfoEditSatus"
                 android:layout_width="14dp"
                 android:layout_height="18dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="false"
                 android:background="#00FFFFFF"
-                android:tint="#03FFFFFF"
                 app:srcCompat="@drawable/ic_icons8_edit"
                 tools:ignore="SpeakableTextPresentCheck,VectorDrawableCompat" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Дата доставки:"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editTextOrderInfoDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="date" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Описание:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewOrderInfoDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Расположение:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewOrderInfoLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewOrderInfoDateAdded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:text="Добавлено в заказы:"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
 

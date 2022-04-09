@@ -328,26 +328,18 @@ public class DBHelper extends SQLiteOpenHelper {
             order.setLink_to_advert(cursor.getString(cursor.getColumnIndex(Order.LINK_TO_ADVERT)));
             order.setPrice(cursor.getFloat(cursor.getColumnIndex(Order.PRICE)));
             //TODO исправь здесь ошибку
-            try {
-                order.setDate_added(dateFormat.parse(
-                        cursor.getString(
-                                cursor.getColumnIndex(
-                                        Order.DATE_ADDED
-                                ))));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            order.setDate_added(new Date(
+                    cursor.getLong(
+                            cursor.getColumnIndex(
+                                    Order.DATE_ADDED
+                            ))));
             order.setAmount(cursor.getFloat(cursor.getColumnIndex(Order.AMOUNT)));
             //TODO исправь здесь ошибку
-            try {
-                order.setDate_of_arrival(dateFormat.parse(
-                        cursor.getString(
-                                cursor.getColumnIndex(
-                                        Order.DATE_OF_ARRIVAL
-                                ))));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            order.setDate_of_arrival(new Date(
+                    cursor.getLong(
+                            cursor.getColumnIndex(
+                                    Order.DATE_OF_ARRIVAL
+                            ))));
             order.setStatus(cursor.getInt(cursor.getColumnIndex(Order.STATUS)));
         }
         return order;
@@ -357,7 +349,7 @@ public class DBHelper extends SQLiteOpenHelper {
         DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try{
             Order order = getOrderById(context, id);
             order.setStatus(status);
@@ -373,9 +365,9 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put(Order.LOCATION, order.getLocation());
             cv.put(Order.LINK_TO_ADVERT, order.getLink_to_advert());
             cv.put(Order.PRICE, order.getPrice());
-            cv.put(Order.DATE_ADDED, dateFormat.format(order.getDate_added()));
+            cv.put(Order.DATE_ADDED, order.getDate_added().getTime());
             cv.put(Order.AMOUNT, order.getAmount());
-            cv.put(Order.DATE_OF_ARRIVAL, dateFormat.format(order.getDate_of_arrival()));
+            cv.put(Order.DATE_OF_ARRIVAL, order.getDate_of_arrival().getTime());
             cv.put(Order.STATUS, order.getStatus());
 
             db.update(DBHelper.ORDERS, cv, Order.ID+"=?",  new String[] {String.valueOf(id)});

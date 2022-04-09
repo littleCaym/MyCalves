@@ -30,6 +30,8 @@ public class OrderListArrayAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     ArrayList<Order> objects;
 
+    TextView textViewStatus;
+
     public OrderListArrayAdapter(Context context, ArrayList<Order> objects) {
         this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,7 +67,7 @@ public class OrderListArrayAdapter extends BaseAdapter {
         TextView textViewRating = view.findViewById(R.id.textViewOrderListRating);
         TextView textViewReviewsNum = view.findViewById(R.id.textViewOrderListNum);
         TextView textViewPrice = view.findViewById(R.id.textViewOrderListPrice);
-        TextView textViewStatus = view.findViewById(R.id.textViewOrderListStatus);
+        textViewStatus = view.findViewById(R.id.textViewOrderListStatus);
         ImageButton imageButtonEditStatus = view.findViewById(R.id.imageButtonOrderListEditSatus);
         Button buttonDelete = view.findViewById(R.id.buttonOrderListDelete);
 
@@ -76,18 +78,7 @@ public class OrderListArrayAdapter extends BaseAdapter {
         //todo textViewReviewsNum.setText(String.valueOf(objects.get(position).getReviewsNum));
         textViewPrice.setText(String.format("%d ₽", (int) objects.get(position).getPrice()));
 
-        textViewStatus.setText(objects.get(position).getStatusString());
-        switch (objects.get(position).getStatus()){
-            case 0:
-            case 1:
-            case 3:
-                textViewStatus.setTextColor(Color.parseColor("#9b870c")); break;
-            case 2:
-                textViewStatus.setTextColor(Color.parseColor("#00FF00")); break;
-            case 4:
-                textViewStatus.setTextColor(Color.parseColor("#FF0000")); break;
-        }
-
+        setTextViewStatus(objects.get(position).getStatus());
 
         LinearLayout listViewClickable = view.findViewById(R.id.linearLayoutOrderListListviewClickable);
 
@@ -135,14 +126,6 @@ public class OrderListArrayAdapter extends BaseAdapter {
         final RadioButton radioButton4 = dialog.findViewById(R.id.radioButtonOrderListDialog4);
 
         final RadioGroup radioGroup = dialog.findViewById(R.id.radioGroupOrderListDialog);
-        /*
-        radioGroup.addView(radioButton0);
-        radioGroup.addView(radioButton1);
-        radioGroup.addView(radioButton2);
-        radioGroup.addView(radioButton3);
-        radioGroup.addView(radioButton4);
-
-         */
 
         switch (objects.get(position).getStatus()){
             case 0: radioButton0.setChecked(true); break;
@@ -156,21 +139,23 @@ public class OrderListArrayAdapter extends BaseAdapter {
         final Button buttonCancel = dialog.findViewById(R.id.buttonOrderListDialogCancel);
 
         buttonAccept.setOnClickListener(v -> {
-            int rg_id = 0;
+            int status = 0;
 
             switch (radioGroup.getCheckedRadioButtonId()){
-                case R.id.radioButtonOrderListDialog0: rg_id = 0; break;
-                case R.id.radioButtonOrderListDialog1: rg_id = 1; break;
-                case R.id.radioButtonOrderListDialog2: rg_id = 2; break;
-                case R.id.radioButtonOrderListDialog3: rg_id = 3; break;
-                case R.id.radioButtonOrderListDialog4: rg_id = 4; break;
+                case R.id.radioButtonOrderListDialog0: status = 0; break;
+                case R.id.radioButtonOrderListDialog1: status = 1; break;
+                case R.id.radioButtonOrderListDialog2: status = 2; break;
+                case R.id.radioButtonOrderListDialog3: status = 3; break;
+                case R.id.radioButtonOrderListDialog4: status = 4; break;
             }
             boolean flag = DBHelper.changeOrderStatusById(context,
-                    rg_id,
+                    status,
                     objects.get(position).getId());
             if (flag) {
-                objects.get(position).setStatus(radioGroup.getCheckedRadioButtonId());
-                this.notifyDataSetChanged();
+//                objects.get(position).setStatus(radioGroup.getCheckedRadioButtonId());
+//                setTextViewStatus(status);
+                Intent intent = new Intent(context, OrderList.class);
+                context.startActivity(intent);
             }
             dialog.dismiss();
 
@@ -178,5 +163,30 @@ public class OrderListArrayAdapter extends BaseAdapter {
         buttonCancel.setOnClickListener(v -> dialog.cancel());
 
         dialog.show();
+    }
+
+    private void setTextViewStatus(int status){
+        switch (status){
+            case 0:
+                textViewStatus.setText("Добавлен в список");
+                textViewStatus.setTextColor(Color.parseColor("#9b870c"));
+                break;
+            case 1:
+                textViewStatus.setText("В пути");
+                textViewStatus.setTextColor(Color.parseColor("#9b870c"));
+                break;
+            case 2:
+                textViewStatus.setText("Прибыл");
+                textViewStatus.setTextColor(Color.parseColor("#00FF00"));
+                break;
+            case 3:
+                textViewStatus.setText("Отложен");
+                textViewStatus.setTextColor(Color.parseColor("#9b870c"));
+
+                break;
+            case 4:
+                textViewStatus.setText("Отменен");
+                textViewStatus.setTextColor(Color.parseColor("#FF0000"));
+        }
     }
 }
