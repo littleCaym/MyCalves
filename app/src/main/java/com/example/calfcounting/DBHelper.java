@@ -957,6 +957,24 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("status", 0);
         db.insert("myWareHouse", null, cv);
 
+        cv = new ContentValues();
+        cv.put("name", "Комбикорм Стартер");
+        cv.put("amount", 0);
+        cv.put("status", 0);
+        db.insert("myWareHouse", null, cv);
+
+        cv = new ContentValues();
+        cv.put("name", "Комбикорм Престартер");
+        cv.put("amount", 0);
+        cv.put("status", 0);
+        db.insert("myWareHouse", null, cv);
+
+        cv = new ContentValues();
+        cv.put("name", "Комбикорм обыкновенный");
+        cv.put("amount", 0);
+        cv.put("status", 0);
+        db.insert("myWareHouse", null, cv);
+
     }
 
     public void setStartReceptsList(SQLiteDatabase db){
